@@ -1,0 +1,24 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
+<!-- 
+name:指定区域名 
+maxElementsInMemory ：缓存在内存中的最大数目 
+maxElementsOnDisk：缓存在磁盘上的最大数目 
+eternal ：设置是否永远不过期 
+overflowToDisk ： 当缓存存储的数据达到maxInMemory限制时是否overflow到磁盘上，需要序列化支持
+timeToIdleSeconds ：对象处于空闲状态的最多秒数后销毁 
+timeToLiveSeconds ：对象处于缓存状态的最多秒数后销毁 
+memoryStoreEvictionPolicy:缓存算法，有LRU（默认）、LFU、FIFO  
+-->
+    <diskStore path="java.io.tmpdir"/> 
+    <defaultCache
+            maxElementsInMemory="10000" 
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="true"
+            maxElementsOnDisk="10000000"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"
+            />
+</ehcache>
