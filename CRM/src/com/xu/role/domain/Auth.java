@@ -35,6 +35,20 @@ public class Auth {
 	@ManyToMany(mappedBy="auths")
 	private List<Role> roles = new ArrayList<>();
 	
+	private int sort;
+	
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
+	public int getSort() {
+		return sort;
+	}
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
 	public int getId() {
 		return id;
 	}

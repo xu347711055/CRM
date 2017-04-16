@@ -21,8 +21,8 @@ public class Department {
 	/**
 	 * 部门负责人
 	 */
-	@ManyToOne
-	private User principal;
+	@Column(length=80)
+	private String principal;
 
 	public int getId() {
 		return id;
@@ -36,10 +36,11 @@ public class Department {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public User getPrincipal() {
+	
+	public String getPrincipal() {
 		return principal;
 	}
-	public void setPrincipal(User principal) {
+	public void setPrincipal(String principal) {
 		this.principal = principal;
 	}
 	@Override

@@ -45,12 +45,12 @@ var navs = [{
 		"icon": "fa-table",
 		"href": "/CRM/system/listUser.action"
 	}, {
-		"title": "Navbar组件",
+		"title": "权限管理",
 		"icon": "fa-navicon",
-		"href": "navbar.html"
+		"href": "/CRM/system/listRole.action"
 	}, {
-		"title": "Laytpl+Laypage",
+		"title": "部门管理",
 		"icon": "&#xe628;",
-		"href": "paging.html"
+		"href": "/CRM/system/listDept.action"
 	}]
 }];

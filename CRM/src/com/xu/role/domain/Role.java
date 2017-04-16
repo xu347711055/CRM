@@ -33,7 +33,7 @@ public class Role {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateTime;
 	
-	@ManyToMany(mappedBy="roles",fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="roles")
 	private List<User> users = new ArrayList<User>();
 	
 	@ManyToMany(fetch=FetchType.EAGER)

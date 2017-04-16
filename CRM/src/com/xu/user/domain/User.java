@@ -76,7 +76,7 @@ public class User {
 	@Column(length=10)
 	private String empCode;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany()
 	private List<Role> roles = new ArrayList<>();
 	
 	
