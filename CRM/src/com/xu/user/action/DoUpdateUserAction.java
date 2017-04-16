@@ -32,7 +32,8 @@ public class DoUpdateUserAction implements ModelDriven<User> {
 		}
 		user.setStatus(1);
 		Department dept = new Department();
-		dept.setId(Integer.valueOf(deptId));
+		dept.setId(Integer.valueOf(deptId));//设置部门
+		user.setDept(dept);
 		userService.merge(user);
 		return "success";
 	}

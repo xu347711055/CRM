@@ -21,7 +21,7 @@
 					<legend><span class="glyphicon glyphicon-th-list" style="color: rgb(9, 109, 169);"> 基本信息</span>
 						<div class="btn-group">
 							<button type="submit" class="btn btn-default">保存</button>
-							<button type="button" class="btn btn-primary">返回</button>
+							<button type="button" class="btn btn-primary" onclick="goback()">返回</button>
 						</div>
 					</legend>
 					<input type="hidden" value="${custId }" name="custId">
@@ -132,4 +132,9 @@
 		<script src="${path }/bootstrap/js/jquery.min.js"></script>
 		<script src="${path }/bootstrap/js/bootstrap.min.js"></script>
 	</body>
+	<script type="text/javascript">
+		function goback(){
+			history.go(-1);
+		}
+	</script>
 </html>

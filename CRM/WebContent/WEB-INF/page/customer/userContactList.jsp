@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
+<%@ taglib uri="/WEB-INF/page.tld"  prefix="t" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -85,7 +86,12 @@
 					</thead>		
 					<tbody>
 					<s:iterator value="pagevo.data" var="item">
+					<s:if test="#item.mainContact==1">
+						<tr class="success">
+					</s:if>
+					<s:else>
 						<tr>
+					</s:else>
 							<td><a href="updateContact.action?resultType=${resultType }&id=${item.id }&custId=${item.cust.id }">${item.name }</a></td>
 							<s:if test="#item.sex==1">
 								<td>男</td>
@@ -102,6 +108,7 @@
 					</s:iterator>
 					</tbody>
 				</table>
+				<t:page url="listContByUser.action" pagevo="${pagevo}"/>
 			</fieldset>				
 		</div>
 		</div>

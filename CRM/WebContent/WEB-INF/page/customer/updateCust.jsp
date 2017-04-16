@@ -34,7 +34,7 @@
 		<div class="container">
 			<div class="row clearfix">
 				<div class="col-sm-12">
-					<blockquote class="layui-elem-quote">修改-客户</blockquote>
+					<blockquote class="layui-elem-quote"><a href="custManage.action" class="btn btn-link">首页 ></a>修改-客户</blockquote>
 					<form class="form-horizontal" role="form" action="doUpdateCust.action" method="post">
 					<input type="hidden" value="${customer.id }" name="id">
 					<fieldset>
@@ -243,10 +243,10 @@
 	<script src="${path}/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 	<script type="text/javascript">
-	$(document).ready(function(){
 		function goback(){
 			history.go(-1);
 		}
+	$(document).ready(function(){
 		
 		$.getJSON("http://localhost:8080/CRM/getProvinceData.action",function(data){
 			$.each(data,function(index,obj){

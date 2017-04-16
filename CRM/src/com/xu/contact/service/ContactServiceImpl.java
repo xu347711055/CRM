@@ -23,8 +23,12 @@ public class ContactServiceImpl extends BaseServiceImpl<Contact> implements Cont
 	@Transactional
 	@Override
 	public void saveContact(Contact contact) {
-		contactDao.updateMainContact();
-		contactDao.add(contact);
+		contactDao.updateMainContact(contact.getCust().getId());
+		if(contact.getId()!=0){
+			contactDao.merge(contact);
+		}else{
+			contactDao.add(contact);
+		}
 	}
 
 	@Override

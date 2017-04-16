@@ -22,7 +22,7 @@
 					<legend><span class="glyphicon glyphicon-th-list" style="color: rgb(9, 109, 169);"> 基本信息</span>
 						<div class="btn-group">
 							<button type="submit" class="btn btn-default">保存</button>
-							<button type="button" class="btn btn-primary">返回</button>
+							<button type="button" class="btn btn-primary" onclick="goback()">返回</button>
 						</div>
 					</legend>
 					<input type="hidden" value="${custId }" name="custId">
@@ -66,12 +66,12 @@
    						<label class="col-sm-2">是否主联系人</label>
    						<div class="col-sm-4">
 							<s:if test="contact.mainContact==0">
-								<input type="radio" name="ctState" value="1" >是
-				    			<input type="radio" name="ctState" value="0" checked>否
+								<input type="radio" name="mainContact" value="1" >是
+				    			<input type="radio" name="mainContact" value="0" checked>否
 							</s:if>
 							<s:else>
-								<input type="radio" name="ctState" value="1" checked>是
-				    			<input type="radio" name="ctState" value="0">否
+								<input type="radio" name="mainContact" value="1" checked>是
+				    			<input type="radio" name="mainContact" value="0">否
 							</s:else>
    						</div>
 					</div>
@@ -147,4 +147,9 @@
 		<script src="${path }/bootstrap/js/jquery.min.js"></script>
 		<script src="${path }/bootstrap/js/bootstrap.min.js"></script>
 	</body>
+	<script type="text/javascript">
+		function goback(){
+			history.go(-1);
+		}
+	</script>
 </html>

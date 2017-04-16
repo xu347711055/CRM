@@ -91,17 +91,17 @@
 		<hr />
 		<br />
 		<div class="col-sm-12 column">
-			<form class="form-horizontal" role="form" action="" method="post">
+			<form class="form-horizontal" role="form" action="doSearch.action" method="post">
 				<fieldset>
 					<legend><span class="glyphicon glyphicon-search" style="color: rgb(9, 109, 169);"> 客户搜索</span></legend>
 					<div class="form-group">
 						<label for="custId" class="col-sm-1 control-label">客户编号</label>
 					    <div class="col-sm-2">
-					      	<input name="custId" type="text" class="form-control" id="custId" placeholder="客户编号" >
+					      	<input name="cnumber" type="text" class="form-control" id="custId" placeholder="客户编号" >
 					    </div>
 					    <label for="custName" class="col-sm-1 control-label">客户名称</label>
 					    <div class="col-sm-2">
-							<input  name="custName" type="text" class="form-control" id="custName" placeholder="客户名称">
+							<input  name="cname" type="text" class="form-control" id="custName" placeholder="客户名称">
 					    </div>
 					     <label for="telephone" class="col-sm-1 control-label">电话</label>
 					    <div class="col-sm-2">
@@ -113,61 +113,29 @@
 					    </div>
 				 	</div>
 				 	<div class="form-group">
-						<label for="deptName" class="col-sm-1 control-label">所属部门</label>
+						 <label for="bProperty" class="col-sm-1 control-label">企业性质</label>
 					    <div class="col-sm-2">
-					      	<select class="form-control" id="deptName" name="dept">
-								<option>--请选择--</option>
-								<option value="">2</option>
-								<option value="">3</option>
-								<option value="">4</option>
-								<option value="">5</option>
-							</select>
-					    </div>
-					    <label for="owner" class="col-sm-1 control-label">所属人</label>
-					    <div class="col-sm-2">
-							<select class="form-control" id="owner" name="owner">
-								<option>--请选择--</option>
-								<option value="">2</option>
-								<option value="">3</option>
-								<option value="">4</option>
-								<option value="">5</option>
+							<select class="form-control" id="bProperty" name="companyNature">
+								<option value="">--请选择--</option>
 							</select>
 					    </div>
 					    <label for="level" class="col-sm-1 control-label">客户等级</label>
 					    <div class="col-sm-2">
 					  		<select class="form-control" id="level" name="level">
-								<option>--请选择--</option>
-								<option value="">2</option>
-								<option value="">3</option>
-								<option value="">4</option>
-								<option value="">5</option>
-							</select>
-					    </div>
-				 	</div>
-				 	<div class="form-group">
-						<label for="custFrom" class="col-sm-1 control-label">客户来源</label>
-					    <div class="col-sm-2">
-					      	<select class="form-control" id="custFrom" name="custFrom">
-								<option>--请选择--</option>
-								<option value="">2</option>
-								<option value="">3</option>
-								<option value="">4</option>
-								<option value="">5</option>
-							</select>
-					    </div>
-					    <label for="custProperty" class="col-sm-1 control-label">客户性质</label>
-					    <div class="col-sm-2">
-							<select class="form-control" id="custProperty" name="custProperty">
-								<option>--请选择--</option>
-								<option value="">2</option>
-								<option value="">3</option>
-								<option value="">4</option>
-								<option value="">5</option>
+								<option value="">--请选择--</option>
 							</select>
 					    </div>
 					    <label for="contactDate" class="col-sm-1 control-label">联系日期</label>
 					    <div class="col-sm-2">
 					  		<input type="date" class="form-control" name="contactDate" id="contactDate"/>
+					    </div>
+				 	</div>
+				 	<div class="form-group">
+						<label for="source" class="col-sm-1 control-label">客户来源</label>
+					    <div class="col-sm-2">
+					      	<select class="form-control" id="source" name="source">
+								<option value="">--请选择--</option>
+							</select>
 					    </div>
 				 	</div>
 			 	</fieldset>
@@ -180,7 +148,6 @@
 						<span class="glyphicon glyphicon-list-alt" style="color: rgb(9, 109, 169);">客户列表</span><br />
 						<div class="btn-group btn-group-md">
 				 			<a class="btn btn-info" href="addCust.action"><em class="glyphicon glyphicon-plus"></em> 新建</a> 
-				 			<a class="btn btn-default" hhref=""><em class="glyphicon glyphicon-cog" style="color: rgb(139 137 137);"></em> 下次联系时间</a> 
 				 			<button class="btn btn-info" type="button"><em class="glyphicon glyphicon-user"></em> 共享</button>
 						</div>						
 					</legend>
@@ -218,7 +185,7 @@
 					<td>${item.contactDate}</td>
 					<s:iterator value="#item.contacts" var="ct">
 						<s:if test="#ct.mainContact==1">
-							<td><a href="updateContact.action?id=${ct.id }">${ct.name}</a></td>
+							<td><a href="updateContact.action?id=${ct.id }&custId=${item.id }&resultType=custManage">${ct.name}</a></td>
 						</s:if>
 					</s:iterator>
 					</tr>
@@ -232,11 +199,34 @@
 	</div>
 </div>
 
-		<!--  jQuery文件。务必在bootstrap.min.js 之前引入  -->
 	<script src="${path }/bootstrap/js/jquery.min.js"></script>
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="${path }/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="${path }/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="${path }/plugins/layui/layui.js"></script>
 	</body>
-
+	<script type="text/javascript">
+	
+	$.getJSON("http://localhost:8080/CRM/getDicData.action",function(data){
+		/* $.each(data, function(index,obj) {
+			addOption("level",obj)
+		}); */
+		$.each(data["level"],function(index,obj){
+			addOption("level",obj);
+		});
+		
+		$.each(data["source"],function(index,obj){
+			addOption("source",obj);
+		});
+		$.each(data["quality"],function(index,obj){
+			addOption("bProperty",obj);
+		});
+		
+	});
+	
+	
+	function addOption(id,obj){
+		var Opt = $("<option></option>");
+		Opt.attr("value",obj.value).text(obj.value);
+		$("#"+id).append(Opt);
+	}
+	</script>
 </html>

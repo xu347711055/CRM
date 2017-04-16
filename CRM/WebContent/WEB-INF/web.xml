@@ -52,6 +52,10 @@
        <filter-name>OpenSessionInViewFilter</filter-name>
        <url-pattern>/customer/updateCust.action</url-pattern>
    </filter-mapping>
+   <filter-mapping>
+       <filter-name>OpenSessionInViewFilter</filter-name>
+       <url-pattern>/customer/doSearch.action</url-pattern>
+   </filter-mapping>
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>

@@ -16,7 +16,8 @@ import com.xu.customer.domain.Customer;
 @Action("doUpdateCon")
 @Namespace("/customer")
 @Results({@Result(name="listContByUser",type="redirectAction",params={"actionName","listContByUser","custId","${custId}"}),
-	@Result(name="listContByCust",type="redirectAction",params={"actionName","listContByCust","custId","${custId}"})})
+	@Result(name="listContByCust",type="redirectAction",params={"actionName","listContByCust","custId","${custId}"}),
+	@Result(name="custManage",location="/customer/custManage.action",type="redirect")})
 
 public class DoUpdateConAction implements ModelDriven<Contact> {
 	@Autowired
@@ -31,7 +32,7 @@ public class DoUpdateConAction implements ModelDriven<Contact> {
 		customer.setId(Integer.valueOf(custId));
 		contact.setCust(customer);
 		System.out.println("******contact:"+contact);
-		contactService.merge(contact);
+		contactService.saveContact(contact);
 		return resultType;
 	}
 	

@@ -20,13 +20,8 @@ public class DoAddContactAction implements ModelDriven<Contact>{
 	private ContactService contactService;
 	private Contact contact = new Contact();
 	private String custId;
-	private String[] ctState;
 	
 	public String execute(){
-		System.out.println(contact);
-		for(String state:ctState){
-			contact.setMainContact(Integer.valueOf(state));
-		}
 		Customer customer = new Customer();
 		if(custId!=null){
 			customer.setId(Integer.valueOf(custId));
@@ -51,14 +46,6 @@ public class DoAddContactAction implements ModelDriven<Contact>{
 
 	public void setCustId(String custId) {
 		this.custId = custId;
-	}
-
-	public String[] getCtState() {
-		return ctState;
-	}
-
-	public void setCtState(String[] ctState) {
-		this.ctState = ctState;
 	}
 
 	@Override

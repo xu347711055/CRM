@@ -7,7 +7,7 @@ import com.xu.contact.domain.Contact;
 
 public interface ContactDao extends BaseDao<Contact> {
 
-	public void updateMainContact();
+	public void updateMainContact(int cust_id);
 	
 	public List<Contact> listContactByUser(int userId, int offset, int pageSize);
 }

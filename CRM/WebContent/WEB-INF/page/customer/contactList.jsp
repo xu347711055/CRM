@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
+<%@ taglib uri="/WEB-INF/page.tld"  prefix="t" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,7 +30,11 @@
 	<body>
 		<div class="container">
 		<div class="col-md-12 column">
-			<blockquote class="layui-elem-quote">${customer.cname }联系人列表</blockquote>
+			<blockquote class="layui-elem-quote">
+				<a href="custManage.action" class="btn btn-link">首页 ></a>
+				<button class="btn btn-link" onclick="goback()">上一页 ></button>
+				${customer.cname }联系人列表
+			</blockquote>
 			<form class="form-horizontal" role="form" action="" method="post">
 				<fieldset>
 					<legend><span class="glyphicon glyphicon-search" style="color: rgb(9, 109, 169);"> 联系人搜索</span></legend>
@@ -86,7 +91,12 @@
 					</thead>		
 					<tbody>
 					<s:iterator value="contactList" var="item">
+					<s:if test="#item.mainContact==1">
+						<tr class="success">
+					</s:if>
+					<s:else>
 						<tr>
+					</s:else>
 							<td><a href="updateContact.action?resultType=${resultType }&id=${item.id }&custId=${customer.id }">${item.name }</a></td>
 							<s:if test="#item.sex==1">
 								<td>男</td>
@@ -107,4 +117,9 @@
 		</div>
 		</div>
 	</body>
+	<script type="text/javascript">
+		function goback(){
+			history.go(-1);
+		}
+	</script>
 </html>

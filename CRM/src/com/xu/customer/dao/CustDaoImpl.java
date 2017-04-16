@@ -1,9 +1,9 @@
 package com.xu.customer.dao;
 
 import java.math.BigInteger;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -11,6 +11,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
@@ -93,6 +94,36 @@ public class CustDaoImpl extends BaseDaoImp<Customer> implements CustDao {
 				query.setString(1, value);
 				BigInteger result = (BigInteger) query.uniqueResult();
 				return result.intValue();
+			}
+		});
+	}
+
+	@Override
+	public List<Customer> listCustByUserEqAndLike(Map<String, String> alias, int offset, int pageSize,
+			Map<String, Object> conditionsEq, Map<String, Object> conditionsLike, Order... orders) {
+		return this.template.execute(new HibernateCallback<List<Customer>>() {
+
+			@Override
+			public List<Customer> doInHibernate(Session session) throws HibernateException {
+				Criteria c = session.createCriteria(Customer.class);
+				if(alias!=null){
+					for(Map.Entry<String, String> entry:alias.entrySet()){
+						c.createAlias(entry.getKey(), entry.getValue());
+					}
+				}
+				for(Entry<String, Object> entry : conditionsEq.entrySet()){
+					c.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+				}
+				for(Entry<String, Object> entry : conditionsLike.entrySet()){
+					System.out.println("*************like:"+entry.getValue()+"%");
+					c.add(Restrictions.like(entry.getKey(), entry.getValue()+"%"));
+				}
+				if(orders!=null){
+					for( Order order: orders){
+						c.addOrder(order);
+					}
+				}
+				return c.list();
 			}
 		});
 	}

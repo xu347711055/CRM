@@ -15,12 +15,13 @@ import com.xu.contact.domain.Contact;
 public class ContactDaoImpl extends BaseDaoImp<Contact> implements ContactDao {
 
 	@Override
-	public void updateMainContact() {
+	public void updateMainContact(int cust_id) {
 		this.template.execute(new HibernateCallback<Contact>() {
 
 			@Override
 			public Contact doInHibernate(Session session) throws HibernateException {
-				Query query = session.createSQLQuery("update contact set mainContact=0 where mainContact=1");
+				Query query = session.createSQLQuery("update contact set mainContact=0 where mainContact=1 and cust_id=?");
+				query.setInteger(0, cust_id);
 				query.executeUpdate();
 				return null;
 			}

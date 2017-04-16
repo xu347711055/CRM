@@ -16,4 +16,7 @@ public interface CustDao extends BaseDao<Customer> {
 	public List<Customer> listCustByUser(Map<String,String> alias, Criterion[] criterion, Order...orders);
 
 	public int getCountByDic(String key , String value);
+	
+	public List<Customer> listCustByUserEqAndLike(Map<String,String> alias,int offset, int pageSize,  
+			 Map<String, Object> conditionsEq, Map<String, Object> conditionsLike, Order...orders);
 }

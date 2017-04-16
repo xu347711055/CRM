@@ -3,6 +3,7 @@ package com.xu.customer.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
@@ -33,6 +34,8 @@ public class CustServiceImpl extends BaseServiceImpl<Customer>  implements CustS
 		return pagevo;
 	}
 	
+	
+	
 	private Order[] toOrderArray(Map<String, String> orders) {
 		List<Order> orderList = new ArrayList<Order>();
 		Order[] orderArray = new Order[] {};
@@ -62,6 +65,18 @@ public class CustServiceImpl extends BaseServiceImpl<Customer>  implements CustS
 	@Override
 	public int getCountByDic(Dictionary dic) {
 		return this.custDao.getCountByDic(dic.getCode(), dic.getValue());
+	}
+
+
+
+	@Override
+	public PageVO<Customer> listCustByUserEqAndLike(Map<String, String> alias, Map<String, Object> conditionsEq,
+			PageVO<Customer> pagevo, Map<String, String> orders, Map<String, Object> conditionsLike) {
+		Order[] ordersArray = toOrderArray(orders);
+		System.out.println(conditionsLike);
+		List<Customer> custs = this.custDao.listCustByUserEqAndLike(alias, pagevo.getOffset(), pagevo.getPageSize(), conditionsEq, conditionsLike, ordersArray);
+		pagevo.setData(custs);
+		return pagevo;
 	}
 	
 }
