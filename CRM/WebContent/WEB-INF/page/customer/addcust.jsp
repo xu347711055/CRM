@@ -216,13 +216,13 @@
 						    </div>
 					    </div>
 					    
-					     <div class="form-group">
+					     <%-- <div class="form-group">
 						    <label for="owner" class="col-sm-2 control-label"><span class="labelspan">所属人员工号：</span></label>
 						    <div class="col-sm-4">
 						      	<input type="text" name="account" id="owner" class="form-control" required="required" />
 						   		<span style='color:red; display: none' id="msg">该员工号不存在</span>
 						    </div>
-					    </div>
+					    </div> --%>
 					</fieldset>
 					</form>
 				</div>
@@ -304,7 +304,7 @@
 			$("#"+id).append(Opt);
 		}
 		
-		$("#owner").change(function(){
+		/* $("#owner").change(function(){
 			var account = $(this).val();
 			$.getJSON("http://localhost:8080/CRM/customer/checkOwner.action?account="+account,function(data){
 				if(data==null){
@@ -315,7 +315,7 @@
 					$("#msg").css("display","none");
 				}
 			});
-		});
+		}); */
 	})
 	</script>
 	

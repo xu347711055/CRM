@@ -2,6 +2,7 @@ package com.xu.common.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
@@ -38,5 +39,11 @@ public interface BaseDao<T> {
 	public List<Integer> getCustByUser(int userId, int pageSize, int offset);
 	
 	public List<Integer> getCustByUser(int userId);
+	
+	public List<T> listByPageEqAndLike(Class<T> entityClass,int offset, int pageSize,  
+			 Map<String, Object> conditionsEq, Map<String, Object> conditionsLike, Order...orders);
 
+	public List<T> listByPageEqAndLike(Class<T> entityClass,int offset, int pageSize, Map<String, Object> conditionsEq,
+			Map<String, Object> conditionsLike,Map<String, List<Object>> conditionsOrLike, 
+			Map<String, List<Object>> conditionsOrEq, Order... orders);
 }

@@ -14,7 +14,7 @@ import com.xu.customer.domain.Customer;
 
 @ParentPackage("cms")
 @Namespace("/customer")
-@Results({@Result(name="listByCust",type="redirectAction",
+@Results({@Result(name="listRecordByCust",type="redirectAction",
 params={"actionName","listRecordByCust","custId","${custId}","cname","${cname}"}),
 	@Result(name="listRecordByUser",type="redirect",location="listRecordByUser.action")})
 @Action("doUpdateRecord")

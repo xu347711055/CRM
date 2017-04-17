@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<blockquote class="layui-elem-quote">联系记录</blockquote>
+			<blockquote class="layui-elem-quote">${cname }联系记录</blockquote>
 			<form class="form-horizontal" action="" method="post">
 				<fieldset>
 					<legend><span class="glyphicon glyphicon-search" style="color: rgb(9, 109, 169);"> 搜索联系记录</span></legend>
@@ -43,7 +43,10 @@
 				</div>
 			</form>
 			<div class="col-sm-12">
-			<span class="glyphicon glyphicon-th-list" style="color: rgb(9, 109, 169);font-size:20px ;"> 联系记录列表</span>
+			<span class="glyphicon glyphicon-th-list" style="color: rgb(9, 109, 169);font-size:20px ;">${cname } 联系记录列表</span>
+			<s:if test="updateType=='listRecordByCust'">
+				<a class="btn btn-info" href="addRecord.action?custId=${custId }&cname=${cname }"><em class="glyphicon glyphicon-plus"></em> 新建</a> 
+			</s:if>
 			<hr>
 				<table class="table table-bordered">
 					<thead>

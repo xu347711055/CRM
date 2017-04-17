@@ -31,13 +31,14 @@
 		<div class="container">
 		<div class="col-md-12 column">
 			<blockquote class="layui-elem-quote">${user.name }联系人列表</blockquote>
-			<form class="form-horizontal" role="form" action="" method="post">
+			<form class="form-horizontal" role="form" action="doSearchContByUser.action" method="post">
+			<input type="hidden" name="resultType" value="${resultType }">
 				<fieldset>
 					<legend><span class="glyphicon glyphicon-search" style="color: rgb(9, 109, 169);"> 联系人搜索</span></legend>
 					<div class="form-group">
 						<label for="contactName" class="col-sm-1 control-label">姓名</label>
 					    <div class="col-sm-2">
-					      	<input name="contactName" type="text" class="form-control" id="contactName" placeholder="联系人姓名">
+					      	<input name="contName" type="text" class="form-control" id="contactName" placeholder="联系人姓名">
 					    </div>
 					    <label for="telephone" class="col-sm-1 control-label">手机</label>
 					    <div class="col-sm-2">
@@ -45,7 +46,7 @@
 					    </div>
 					     <label for="qq" class="col-sm-1 control-label">QQ号</label>
 					    <div class="col-sm-2">
-					      <input name="qq" type="tel" class="form-control" id="qq" placeholder="QQ">
+					      <input name="qqNum" type="tel" class="form-control" id="qq" placeholder="QQ">
 					    </div>
 					    <div class="col-sm-3">
 					      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search">搜索</span></button>
@@ -60,10 +61,6 @@
 					    <label for="email" class="col-sm-1 control-label">电子邮箱</label>
 					    <div class="col-sm-2">
 							<input name="text" type="text" class="form-control" id="email" placeholder="电子邮箱">					    
-					    </div>
-					    <label for="contactDate" class="col-sm-1 control-label">联系日期</label>
-					    <div class="col-sm-2">
-					  		<input type="date" class="form-control" name="contactDate" id="contactDate"/>
 					    </div>
 				 	</div>
 			 	</fieldset>

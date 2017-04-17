@@ -225,7 +225,6 @@
 						    <s:iterator value="customer.owner" var="i">
 						      	<input value="${i.account}" type="text" id="owner" class="form-control" required="required" disabled="disabled" />
 						   		<input type="hidden" value="${i.account }" name="account">
-						   		<span style='color:red; display: none' id="msg">该员工号不存在</span>
 						    </s:iterator>
 						    </div>
 					    </div>

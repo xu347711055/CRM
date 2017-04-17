@@ -35,13 +35,15 @@
 				<button class="btn btn-link" onclick="goback()">上一页 ></button>
 				${customer.cname }联系人列表
 			</blockquote>
-			<form class="form-horizontal" role="form" action="" method="post">
+			<form class="form-horizontal" role="form" action="doSearchContByCust.action" method="post">
+			<input type="hidden" name="resultType" value="${resultType }">
+			<input type="hidden" name="custId" value="${custId }">
 				<fieldset>
 					<legend><span class="glyphicon glyphicon-search" style="color: rgb(9, 109, 169);"> 联系人搜索</span></legend>
 					<div class="form-group">
 						<label for="contactName" class="col-sm-1 control-label">姓名</label>
 					    <div class="col-sm-2">
-					      	<input name="contactName" type="text" class="form-control" id="contactName" placeholder="联系人姓名">
+					      	<input name="contName" type="text" class="form-control" id="contactName" placeholder="联系人姓名">
 					    </div>
 					    <label for="telephone" class="col-sm-1 control-label">手机</label>
 					    <div class="col-sm-2">
@@ -49,7 +51,7 @@
 					    </div>
 					     <label for="qq" class="col-sm-1 control-label">QQ号</label>
 					    <div class="col-sm-2">
-					      <input name="qq" type="tel" class="form-control" id="qq" placeholder="QQ">
+					      <input name="qqNum" type="tel" class="form-control" id="qq" placeholder="QQ">
 					    </div>
 					    <div class="col-sm-3">
 					      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search">搜索</span></button>
@@ -57,18 +59,11 @@
 					    </div>
 				 	</div>
 				 	<div class="form-group">
-						<label for="custName" class="col-sm-1 control-label">客户名称</label>
-					    <div class="col-sm-2">
-							<input  name="custName" type="text" class="form-control" id="custName" placeholder="客户名称">
-					    </div>
 					    <label for="email" class="col-sm-1 control-label">电子邮箱</label>
 					    <div class="col-sm-2">
-							<input name="text" type="text" class="form-control" id="email" placeholder="电子邮箱">					    
+							<input name="email" type="text" class="form-control" id="email" placeholder="电子邮箱">					    
 					    </div>
-					    <label for="contactDate" class="col-sm-1 control-label">联系日期</label>
-					    <div class="col-sm-2">
-					  		<input type="date" class="form-control" name="contactDate" id="contactDate"/>
-					    </div>
+					    
 				 	</div>
 			 	</fieldset>
 			</form>
@@ -90,7 +85,7 @@
 						</tr>
 					</thead>		
 					<tbody>
-					<s:iterator value="contactList" var="item">
+					<s:iterator value="pagevo.data" var="item">
 					<s:if test="#item.mainContact==1">
 						<tr class="success">
 					</s:if>

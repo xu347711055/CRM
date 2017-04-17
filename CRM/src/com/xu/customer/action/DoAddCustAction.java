@@ -30,15 +30,14 @@ public class DoAddCustAction implements ModelDriven<Customer>{
 	private UserService userService;
 	private Customer customer = new Customer();
 	private String cityId;
-	private String account;
 	
 	public String execute(){
 		User creator = (User) ActionContext.getContext().getSession().get("user");
-		User owner = userService.get(User.class, "account", account);
+		/*User owner = userService.get(User.class, "account", account);
 		if(owner==null){
 			System.err.println("该员工号不存在");
 			return "fail";
-		}
+		}*/
 		City city = new City();
 		city.setId(Integer.valueOf(cityId));
 		customer.setCity(city);
@@ -46,7 +45,7 @@ public class DoAddCustAction implements ModelDriven<Customer>{
 		customer.setCreator(creator);
 		customer.setUpdater(creator);
 		List<User> owners = new ArrayList<>();
-		owners.add(owner);
+		owners.add(creator);
 		customer.setOwner(owners);
 		
 		custService.add(customer);
@@ -62,16 +61,6 @@ public class DoAddCustAction implements ModelDriven<Customer>{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
-	public String getAccount() {
-		return account;
-	}
-
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
 
 	public CustService getCustService() {
 		return custService;

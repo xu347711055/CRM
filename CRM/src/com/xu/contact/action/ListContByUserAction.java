@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
+import com.xu.common.Constants.Constant;
 import com.xu.common.page.PageVO;
 import com.xu.contact.domain.Contact;
 import com.xu.contact.service.ContactService;
@@ -36,7 +37,7 @@ public class ListContByUserAction implements ModelDriven<PageVO<Contact>>{
 		}else{
 			pagevo = contactService.getContactsByUser(user.getId(), pagevo);
 		}
-		this.resultType = "listContByUser";
+		this.resultType = Constant.ResultType_ListContByUser;
 		return "success";
 	}
 

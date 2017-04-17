@@ -1,7 +1,6 @@
 package com.xu.contact.action;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -10,6 +9,9 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.opensymphony.xwork2.ModelDriven;
+import com.xu.common.Constants.Constant;
+import com.xu.common.page.PageVO;
 import com.xu.contact.domain.Contact;
 import com.xu.contact.service.ContactService;
 import com.xu.customer.domain.Customer;
@@ -19,15 +21,15 @@ import com.xu.customer.service.CustService;
 @Action("/listContByCust")
 @Namespace("/customer")
 @Result(name="success",location="contactList.jsp")
-public class ListContByCustAction {
+public class ListContByCustAction implements ModelDriven<PageVO<Contact>> {
 	@Autowired
 	private ContactService contactService;
 	@Autowired
 	private CustService custService;
 	private String custId;
-	private List<Contact> contactList;
 	private Customer customer;
 	private String resultType;
+	private PageVO<Contact> pagevo = new PageVO<>();
 	
 	public String execute(){
 		int customerId = Integer.valueOf(custId);
@@ -37,9 +39,9 @@ public class ListContByCustAction {
 			cust.setId(customerId);
 		}
 		conditions.put("cust", cust);
-		contactList = contactService.list(conditions, Contact.class, null);
+		pagevo = contactService.listByPage(Contact.class, pagevo, conditions, null);
 		customer = custService.get(Customer.class, customerId);
-		this.resultType="listContByCust";
+		this.resultType=Constant.ResultType_ListContByCust;
 		return "success";
 	}
 
@@ -67,12 +69,17 @@ public class ListContByCustAction {
 		this.custId = custId;
 	}
 
-	public List<Contact> getContactList() {
-		return contactList;
+	public PageVO<Contact> getPagevo() {
+		return pagevo;
 	}
 
-	public void setContactList(List<Contact> contactList) {
-		this.contactList = contactList;
+	public void setPagevo(PageVO<Contact> pagevo) {
+		this.pagevo = pagevo;
+	}
+
+	@Override
+	public PageVO<Contact> getModel() {
+		return this.pagevo;
 	}
 
 }

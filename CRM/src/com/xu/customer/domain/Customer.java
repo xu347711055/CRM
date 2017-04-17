@@ -30,7 +30,7 @@ public class Customer {
 	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	/**
 	 * 客户编号
 	 */
@@ -216,10 +216,10 @@ public class Customer {
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getCnumber() {

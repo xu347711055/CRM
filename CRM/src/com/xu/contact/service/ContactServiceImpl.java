@@ -1,10 +1,13 @@
 package com.xu.contact.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,17 +49,6 @@ public class ContactServiceImpl extends BaseServiceImpl<Contact> implements Cont
 		return contacts;
 	}
 	
-	public static void main(String[] args) {
-		SpringUtil.init("application.xml");
-		ContactService service = SpringUtil.getBean(ContactService.class);
-		PageVO<Contact> pageVO = new PageVO<Contact>();
-		pageVO.setCurPage(1);
-		pageVO.setPageSize(1);
-		pageVO = service.getContactsByUser(1,pageVO);
-		for(Contact cont:pageVO.getData()){
-			System.out.println(cont);
-		}
-	}
 	
 	@Override
 	public PageVO<Contact> getContactsByUser(int userId, PageVO<Contact> pagevo) {
@@ -78,6 +70,69 @@ public class ContactServiceImpl extends BaseServiceImpl<Contact> implements Cont
 		List<Contact> list = contactDao.listContactByUser(userId, pagevo.getOffset(), pagevo.getPageSize());
 		pagevo.setData(list);
 		return pagevo;
+	}
+
+	@Override
+	public PageVO<Contact> listContactEqAndLike(PageVO<Contact> pagevo, Map<String, Object> conditionEq,
+			Map<String, Object> conditionLike, Map<String, String> orders) {
+		Order[] ordersArray = toOrderArray(orders);
+		List<Contact> custs = this.contactDao.listByPageEqAndLike(Contact.class,pagevo.getOffset(), 
+				pagevo.getPageSize(), conditionEq, conditionLike, ordersArray);
+		pagevo.setData(custs);
+		return pagevo;
+	}
+	
+	@Override
+	public PageVO<Contact> listContactEqAndLike(PageVO<Contact> pagevo, Map<String, Object> conditionEq,
+			Map<String, Object> conditionLike, Map<String,List<Object>> orLike, 
+			Map<String,List<Object>> orEq,Map<String, String> orders) {
+		Order[] ordersArray = toOrderArray(orders);
+		List<Contact> custs = this.contactDao.listByPageEqAndLike(Contact.class,pagevo.getOffset(), 
+				pagevo.getPageSize(), conditionEq, conditionLike, orLike, orEq, ordersArray);
+		pagevo.setData(custs);
+		return pagevo;
+	}
+	
+	private Order[] toOrderArray(Map<String, String> orders) {
+		List<Order> orderList = new ArrayList<Order>();
+		Order[] orderArray = new Order[] {};
+		if (orders != null) {
+			for (Map.Entry<String, String> entry : orders.entrySet()) {
+				if ("asc".equalsIgnoreCase(entry.getValue())) {
+					orderList.add(Order.asc(entry.getKey()));
+				}
+
+			}
+			orderArray = orderList.toArray(new Order[orders.size()]);
+		}
+		return orderArray;
+	}
+
+	@Override
+	public PageVO<Contact> getContacts(PageVO<Contact> pagevo, Map<String, Object> conditionEq,
+			Map<String, Object> conditionLike, Map<String, List<Object>> or) {
+		pagevo.setData(this.contactDao.listContacts(pagevo.getOffset(), pagevo.getPageSize()
+				, conditionEq, conditionLike, or));
+		return pagevo;
+	}
+	
+	public static void main(String[] args) {
+		ContactService service = SpringUtil.getBean(ContactService.class);
+		PageVO<Contact> pagevo = new PageVO<>();
+		HashMap<String, Object> conditionEq = new HashMap<>();
+		conditionEq.put("qqNum", "124785436");
+		HashMap<String, Object> conditionLike = new HashMap<>();
+		conditionLike.put("telephone", "1324784245");
+		HashMap<String, List<Object>> orEq = new HashMap<>();
+		List<Object> list = new ArrayList<>();
+		Customer customer = new Customer();
+		customer.setId(1);
+		list.add(customer);
+		orEq.put("cust", list);
+		pagevo = service.listContactEqAndLike(pagevo, null, null,null, orEq, null);
+		for(Contact c : pagevo.getData()){
+			System.out.println(c);
+		}
 	}
 	
 }

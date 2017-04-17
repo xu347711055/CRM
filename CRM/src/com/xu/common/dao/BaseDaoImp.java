@@ -2,6 +2,8 @@ package com.xu.common.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -172,6 +174,77 @@ public class BaseDaoImp<T> implements BaseDao<T> {
 				query.setInteger(2, pageSize);
 				List<Integer> list = query.list();
 				return list;
+			}
+		});
+	}
+	
+	@Override
+	public List<T> listByPageEqAndLike(Class<T> entityClass,int offset, int pageSize, Map<String, Object> conditionsEq,
+			Map<String, Object> conditionsLike, Order... orders) {
+		return this.template.execute(new HibernateCallback<List<T>>() {
+
+			@Override
+			public List<T> doInHibernate(Session session) throws HibernateException {
+				Criteria c = session.createCriteria(entityClass);
+				if(conditionsEq!=null){
+					for(Entry<String, Object> entry : conditionsEq.entrySet()){
+						c.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+					}
+				}
+				if(conditionsLike!=null){
+					for(Entry<String, Object> entry : conditionsLike.entrySet()){
+						c.add(Restrictions.like(entry.getKey(), entry.getValue()+"%"));
+					}
+				}
+				if(orders!=null){
+					for( Order order: orders){
+						c.addOrder(order);
+					}
+				}
+				return c.list();
+			}
+		});
+	}
+	
+	@Override
+	public List<T> listByPageEqAndLike(Class<T> entityClass,int offset, int pageSize, Map<String, Object> conditionsEq,
+			Map<String, Object> conditionsLike,Map<String, List<Object>> conditionsOrLike, 
+			Map<String, List<Object>> conditionsOrEq, Order... orders) {
+		return this.template.execute(new HibernateCallback<List<T>>() {
+
+			@Override
+			public List<T> doInHibernate(Session session) throws HibernateException {
+				Criteria c = session.createCriteria(entityClass);
+				if(conditionsEq!=null){
+					for(Entry<String, Object> entry : conditionsEq.entrySet()){
+						c.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+					}
+				}
+				if(conditionsLike!=null){
+					for(Entry<String, Object> entry : conditionsLike.entrySet()){
+						c.add(Restrictions.like(entry.getKey(), entry.getValue()+"%"));
+					}
+				}
+				if(conditionsOrLike!=null){
+					for(Entry<String, List<Object>> entry : conditionsOrLike.entrySet()){
+						for(Object value : entry.getValue()){
+							c.add(Restrictions.or(Restrictions.like(entry.getKey(), value+"%")));
+						}
+					}
+				}
+				if(conditionsOrEq!=null){
+					for(Entry<String, List<Object>> entry : conditionsOrEq.entrySet()){
+						for(Object value : entry.getValue()){
+							c.add(Restrictions.or(Restrictions.eq(entry.getKey(), value)));
+						}
+					}
+				}
+				if(orders!=null){
+					for( Order order: orders){
+						c.addOrder(order);
+					}
+				}
+				return c.list();
 			}
 		});
 	}
