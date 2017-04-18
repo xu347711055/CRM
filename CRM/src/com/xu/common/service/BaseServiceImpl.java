@@ -101,6 +101,10 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public T merge(T entity) {
 		return this.baseDao.merge(entity);
 	}
-	
+
+	@Override
+	public List<T> listLike(Map<String, Object> conditions, Class<T> entityClass, Map<String, String> orders) {
+		return this.baseDao.listLike(conditions, entityClass, toOrderArray(orders));
+	}
 	
 }

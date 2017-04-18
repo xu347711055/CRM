@@ -248,4 +248,28 @@ public class BaseDaoImp<T> implements BaseDao<T> {
 			}
 		});
 	}
+
+	@Override
+	public List<T> listLike(Map<String,Object> conditions, Class<T> entityClass, Order... orders) {
+		return template.execute(new HibernateCallback<List<T>>() {
+
+			@Override
+			public List<T> doInHibernate(Session session) throws HibernateException {
+				Criteria c = session.createCriteria(entityClass);
+				if(conditions!=null){
+					for(Entry<String,Object> entry: conditions.entrySet()){
+						if(entry!=null){
+							c.add(Restrictions.like(entry.getKey(), entry.getValue()+"%"));
+						}
+					}
+				}
+				if(orders!=null){
+					for( Order order: orders){
+						c.addOrder(order);
+					}
+				}
+				return c.list();
+			}
+		});
+	}
 }

@@ -22,6 +22,9 @@ public interface BaseService<T> {
 
 	public List<T> list(Map<String,Object> conditions, Class<T> entityClass,
 			Map<String,String> orders);
+	
+	public List<T> listLike(Map<String,Object> conditions, Class<T> entityClass,
+			Map<String,String> orders);
 
 	public PageVO<T> listByPage(Class<T> entityClass,PageVO<T> pagevo,Map<String,Object> conditions,Map<String, String> orders);
 	/**

@@ -52,7 +52,7 @@ public class ContactDaoImpl extends BaseDaoImp<Contact> implements ContactDao {
 
 	@Override
 	public List<Contact> listContacts(int offset, int pageSize, Map<String, Object> conditionsEq,
-			Map<String, Object> conditionLike, Map<String, List<Object>> orLike) {
+			Map<String, Object> conditionLike, Map<String, List<Object>> orLike, Map<String, List<Object>> orEq) {
 		return this.template.execute(new HibernateCallback<List<Contact>>() {
 
 			@Override
@@ -81,6 +81,25 @@ public class ContactDaoImpl extends BaseDaoImp<Contact> implements ContactDao {
 							if(count!=0){	//最后一个条件后面不需要or
 								sql.append("or ");
 							}
+						}
+					}
+					sql.append(")");
+				}
+				if(orEq!=null && orEq.size()>0){
+					sql.append("and(");
+					Set<Entry<String,List<Object>>> entrySet = orEq.entrySet();
+					for(Entry<String,List<Object>> entry : entrySet){
+						List<Object> values = entry.getValue();
+						int count = values.size();
+						for(Object value : values){
+							sql.append(entry.getKey()+"='"+value+"' ");
+							count--;
+							if(count!=0){	//最后一个条件后面不需要or
+								sql.append("or ");
+							}
+						}
+						if(values.isEmpty()){	
+							sql.append(entry.getKey()+"='"+null+"' ");
 						}
 					}
 					sql.append(")");

@@ -16,7 +16,8 @@ public interface ContactService extends BaseService<Contact> {
 	public PageVO<Contact> getContactsByUser(int userId, PageVO<Contact> pagevo);
 	
 	public PageVO<Contact> getContacts(PageVO<Contact> pagevo,Map<String, Object> conditionEq,
-			Map<String, Object> conditionLike, Map<String, List<Object>> or);
+			Map<String, Object> conditionLike,  Map<String, List<Object>> orLike, 
+			Map<String,List<Object>> orEq);
 
 	public PageVO<Contact> listContactEqAndLike(PageVO<Contact> pagevo, Map<String,Object> conditionEq,
 			Map<String,Object> conditionLike, Map<String,String> orders);

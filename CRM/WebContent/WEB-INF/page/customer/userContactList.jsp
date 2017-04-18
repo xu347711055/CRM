@@ -60,7 +60,7 @@
 					    </div>
 					    <label for="email" class="col-sm-1 control-label">电子邮箱</label>
 					    <div class="col-sm-2">
-							<input name="text" type="text" class="form-control" id="email" placeholder="电子邮箱">					    
+							<input name="email" type="text" class="form-control" id="email" placeholder="电子邮箱">					    
 					    </div>
 				 	</div>
 			 	</fieldset>

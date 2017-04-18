@@ -27,6 +27,8 @@ public interface BaseDao<T> {
 	 */
 	public List<T> list(Criterion[] criterions, Class<T> entityClass,Order ...orders);
 	
+	public List<T> listLike(Map<String,Object> conditions, Class<T> entityClass,Order ...orders);
+	
 	public List<T> listByPage(Criterion[] criterions, Class<T> entityClass, int pageSize, int offset, Order ...orders);
 	
 	public Integer count(Criterion[] criterions, Class<T> entityClass, Order ...orders);

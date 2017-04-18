@@ -48,30 +48,46 @@ public class DoSearchContByUserAction {
 		Map<String, List<Object>> orEq = new HashMap<>();
 		
 		user = (User) ActionContext.getContext().getSession().get("user");//查询当前用户
+		//开始封装查询条件
 		if(!StringUtils.isEmpty(contName)){	//按联系人姓名查询
 			System.out.println("查询条件：name="+contName);
 			conditionsLike.put("ct.name", contName);
+		}
+		if(!StringUtils.isEmpty(telephone)){	//按联系人手机查询
+			System.out.println("查询条件：telephone="+telephone);
+			conditionsLike.put("ct.telephone", telephone);
+		}
+		if(!StringUtils.isEmpty(qqNum)){	//按联系人qq查询
+			System.out.println("查询条件：qqNum="+qqNum);
+			conditionsLike.put("qqNum", qqNum);
+		}
+		if(!StringUtils.isEmpty(email)){	//按联系人邮箱查询
+			System.out.println("查询条件：email="+email);
+			conditionsLike.put("ct.email", email);
 		}
 		if(!StringUtils.isEmpty(custName)){	//按所属客户查询
 			System.out.println("查询条件：cname="+custName);
 			Map<String,Object> custNameCondition = new HashMap<>();
 			custNameCondition.put("cname", custName);
-			List<Customer> custList = custService.list(custNameCondition, Customer.class, null);
+			//先根据客户名称查询出该名字的客户
+			List<Customer> custList = custService.listLike(custNameCondition, Customer.class, null);
+			if(custList.isEmpty()){	//如果查询结果为空，则返回
+				return "success";
+			}
 			List<Object> custIds = new ArrayList<>();
 			for(Customer cust : custList){
 				custIds.add(cust.getId());	
 			}
-			if(custIds.size()>0){
-				orEq.put("cust", custIds);
-			}
+			orEq.put("cust_id", custIds);
 		}
+		
 		if(user.getAdmin()==1){
 			Map<String,String> orders = new HashMap<>();
 			orders.put("id", "asc");
-			pagevo = contService.getContacts(pagevo, conditions, conditionsLike, orEq);
+			pagevo = contService.getContacts(pagevo, conditions, conditionsLike, null, orEq);
 		}else{
 			conditions.put("u.id", user.getId());
-			pagevo = contService.getContacts(pagevo, conditions, conditionsLike, orEq);
+			pagevo = contService.getContacts(pagevo, conditions, conditionsLike, null, orEq);
 		}
 		return "success";
 	}

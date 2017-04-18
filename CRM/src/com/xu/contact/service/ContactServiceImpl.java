@@ -110,9 +110,10 @@ public class ContactServiceImpl extends BaseServiceImpl<Contact> implements Cont
 
 	@Override
 	public PageVO<Contact> getContacts(PageVO<Contact> pagevo, Map<String, Object> conditionEq,
-			Map<String, Object> conditionLike, Map<String, List<Object>> or) {
+			Map<String, Object> conditionLike, Map<String, List<Object>> orLike, Map<String,List<Object>> orEq) {
+		
 		pagevo.setData(this.contactDao.listContacts(pagevo.getOffset(), pagevo.getPageSize()
-				, conditionEq, conditionLike, or));
+				, conditionEq, conditionLike, orLike, orEq));
 		return pagevo;
 	}
 	
