@@ -17,24 +17,29 @@
 	<body>
 		<div class="container">
 			<blockquote class="layui-elem-quote">${cname }联系记录</blockquote>
-			<form class="form-horizontal" action="" method="post">
+			<form class="form-horizontal" action="doSearchRecord.action" method="post">
+			<input type="hidden" name="custId" value="${custId }"> 
+			<input type="hidden" name="cname" value="${cname }"> 
+			<input type="hidden" name="updateType" value="${updateType }"> 
 				<fieldset>
 					<legend><span class="glyphicon glyphicon-search" style="color: rgb(9, 109, 169);"> 搜索联系记录</span></legend>
 				</fieldset>
 				<div class="form-group">
+				<s:if test="updateType=='listRecordByUser'">
 					<label for="custName" class="col-sm-2 control-label">客户名称</label>
 				    <div class="col-sm-4">
 				      	<input name="custName" type="text" class="form-control" id="custName">
 				    </div>
+				</s:if>
 				    <label for="contactName" class="col-sm-2 control-label">联系人姓名</label>
 				    <div class="col-sm-4">
 				      	<input name="contactName" type="text" class="form-control" id="contactName">
 				    </div>
 				</div>
 				<div class="form-group">
-					<label for="date" class="col-sm-2 control-label">创建日期</label>
+					<label for="date" class="col-sm-2 control-label">联系日期</label>
 				    <div class="col-sm-4">
-				      	<input name="date" type="date" class="form-control" id="date">
+				      	<input name="contactDate" type="date" class="form-control" id="date">
 				    </div>
 				    <div class="col-sm-3">
 				      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search">搜索</span></button>
@@ -53,7 +58,7 @@
 						<tr>
 							<th>客户名称</th>
 							<th>联系人</th>
-							<th>创建日期</th>
+							<th>联系日期</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -64,7 +69,7 @@
 									${item.cust.cname }</a>
 								</td>
 								<td>${item.contactName }</td>
-								<td>${item.createTime }</td>
+								<td>${item.contactDate }</td>
 								<td><a href="">删除</a></td>
 							</tr>
 						</s:iterator>

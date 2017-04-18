@@ -1,6 +1,9 @@
 package com.xu.customer.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.xu.common.domain.Dictionary;
 import com.xu.common.page.PageVO;
 import com.xu.common.service.BaseServiceImpl;
+import com.xu.common.util.SpringUtil;
 import com.xu.customer.dao.CustDao;
 import com.xu.customer.domain.Customer;
 
@@ -76,5 +80,26 @@ public class CustServiceImpl extends BaseServiceImpl<Customer>  implements CustS
 		pagevo.setData(custs);
 		return pagevo;
 	}
+
+	/**
+	 * 添加客户策略
+	 */
+
+	@Override
+	public int addStrategy(int custId, String content) {
+		return this.custDao.addStrategy(custId, content);
+	}
 	
+	public static void main(String[] args) {
+		CustService service = SpringUtil.getBean(CustService.class);
+		PageVO<Customer> pagevo = new PageVO<>();
+		Map<String, Object> conditions = new HashMap<>();
+		java.sql.Date date = new java.sql.Date(new Date().getTime());
+		System.out.println(date);
+		conditions.put("contactDate", date);
+		pagevo = service.listByPage(Customer.class, pagevo, conditions, null);
+		for(Customer c : pagevo.getData()){
+			System.out.println(c);
+		}
+	}
 }

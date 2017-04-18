@@ -209,7 +209,15 @@ public class Customer {
 	@OneToMany(mappedBy="cust")
 	private List<Contact> contacts;
 	
+	@Column(columnDefinition="TEXT")
+	private String strategy;
 	
+	public String getStrategy() {
+		return strategy;
+	}
+	public void setStrategy(String strategy) {
+		this.strategy = strategy;
+	}
 	public List<Contact> getContacts() {
 		return contacts;
 	}

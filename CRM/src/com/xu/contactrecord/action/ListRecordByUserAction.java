@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.xu.common.page.PageVO;
-import com.xu.contact.domain.Contact;
 import com.xu.contactrecord.domain.ContactRecord;
 import com.xu.contactrecord.service.RecordService;
 import com.xu.user.domain.User;

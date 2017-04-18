@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -33,6 +34,7 @@ public class CustDaoImpl extends BaseDaoImp<Customer> implements CustDao {
 						c.createAlias(entry.getKey(), entry.getValue());
 					}
 				}
+				
 				if(criterion!=null){
 					for(Criterion crion: criterion){
 						if(crion!=null){
@@ -126,6 +128,22 @@ public class CustDaoImpl extends BaseDaoImp<Customer> implements CustDao {
 				return c.list();
 			}
 		});
+	}
+
+	@Override
+	public Integer addStrategy(int custId, String content) {
+		return  this.template.execute(new HibernateCallback<Integer>() {
+
+			@Override
+			public Integer doInHibernate(Session session) throws HibernateException {
+				String sql = "update customer set strategy=? where id=?";
+				SQLQuery query = session.createSQLQuery(sql);
+				query.setString(0, content);
+				query.setInteger(1, custId);
+				return query.executeUpdate();
+			}
+		});
+		
 	}
 	
 }

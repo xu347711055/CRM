@@ -14,10 +14,6 @@ var navs = [{
 		"title": "联系记录",
 		"icon": "&#xe63c;",
 		"href": "/CRM/customer/listRecordByUser.action"
-	}, {
-		"title": "客户策略",
-		"icon": "&#xe609;",
-		"href": "/CRM/customer/strategy.action"
 	}]
 }, {
 	"title": "统计分析",

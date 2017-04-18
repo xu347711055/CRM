@@ -5,21 +5,21 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xu.customer.domain.Customer;
 import com.xu.customer.service.CustService;
 
-@Result(name="success",location="strategy.jsp")
 @Namespace("/customer")
-@Action("addStrategy")
-public class AddStrategyAction {
+@Action("doAddStrategy")
+@Result(name="success",type="redirectAction",params={"actionName","updateCust","id","${custId}"})
+public class DoAddStrategyAction {
 	@Autowired
 	private CustService custService;
 	private String custId;
 	private String strategy;
 	
 	public String execute(){
-		Customer customer = custService.get(Customer.class, Integer.valueOf(custId));
-		strategy = customer.getStrategy();
+		if(custId!=null){
+			custService.addStrategy(Integer.parseInt(custId), strategy);
+		}
 		return "success";
 	}
 

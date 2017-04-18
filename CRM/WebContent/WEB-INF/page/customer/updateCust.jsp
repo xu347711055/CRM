@@ -41,6 +41,7 @@
 						<legend>基本信息 &nbsp;<button class="btn btn-primary" type="submit"><em class="glyphicon glyphicon-file"></em> 保存</button>
 						<a class="btn btn-success" href="listContByCust.action?custId=${customer.id }"><em class="glyphicon glyphicon-file"></em> 联系人</a>
 							<a class="btn btn-warning" href="listRecordByCust.action?custId=${customer.id }"><em class="glyphicon glyphicon-file"></em> 联系记录</a>
+							<a class="btn btn-primary" href="addStrategy.action?custId=${customer.id }"><em class="glyphicon glyphicon-file"></em> 客户策略</a>
 							<button class="btn btn-default" type="button" onclick="goback()"><em class="glyphicon glyphicon-file"></em> 取消</button>
 						 </legend>
 						<div class="form-group">

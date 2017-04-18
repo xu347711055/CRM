@@ -19,4 +19,7 @@ public interface CustDao extends BaseDao<Customer> {
 	
 	public List<Customer> listCustByUserEqAndLike(Map<String,String> alias,int offset, int pageSize,  
 			 Map<String, Object> conditionsEq, Map<String, Object> conditionsLike, Order...orders);
+	
+	public Integer addStrategy(int custId, String content);
+	
 }

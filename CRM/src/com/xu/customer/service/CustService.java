@@ -21,4 +21,6 @@ public interface CustService extends BaseService<Customer> {
 	public PageVO<Customer> listCustByUserEqAndLike(Map<String,String> alias, 
 			Map<String,Object> conditionsEq, PageVO<Customer> pagevo, 
 			Map<String, String> orders,Map<String,Object> conditionsLike );
+	
+	public int addStrategy(int custId, String content);
 }
