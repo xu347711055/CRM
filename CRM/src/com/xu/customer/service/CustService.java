@@ -20,7 +20,8 @@ public interface CustService extends BaseService<Customer> {
 
 	public PageVO<Customer> listCustByUserEqAndLike(Map<String,String> alias, 
 			Map<String,Object> conditionsEq, PageVO<Customer> pagevo, 
-			Map<String, String> orders,Map<String,Object> conditionsLike );
+			Map<String, String> orders,Map<String,Object> conditionsLike,
+			String betweenPropertyName, Object betweenBegin, Object betweenEnd);
 	
 	public int addStrategy(int custId, String content);
 }

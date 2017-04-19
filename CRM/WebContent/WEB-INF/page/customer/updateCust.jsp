@@ -37,6 +37,7 @@
 					<blockquote class="layui-elem-quote"><a href="custManage.action" class="btn btn-link">首页 ></a>修改-客户</blockquote>
 					<form class="form-horizontal" role="form" action="doUpdateCust.action" method="post">
 					<input type="hidden" value="${customer.id }" name="id">
+					<input type="hidden" value="${resultType }" name="resultType">
 					<fieldset>
 						<legend>基本信息 &nbsp;<button class="btn btn-primary" type="submit"><em class="glyphicon glyphicon-file"></em> 保存</button>
 						<a class="btn btn-success" href="listContByCust.action?custId=${customer.id }"><em class="glyphicon glyphicon-file"></em> 联系人</a>

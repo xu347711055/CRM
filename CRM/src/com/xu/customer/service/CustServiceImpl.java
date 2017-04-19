@@ -1,7 +1,6 @@
 package com.xu.customer.service;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -74,10 +73,13 @@ public class CustServiceImpl extends BaseServiceImpl<Customer>  implements CustS
 
 	@Override
 	public PageVO<Customer> listCustByUserEqAndLike(Map<String, String> alias, Map<String, Object> conditionsEq,
-			PageVO<Customer> pagevo, Map<String, String> orders, Map<String, Object> conditionsLike) {
+			PageVO<Customer> pagevo, Map<String, String> orders, Map<String, Object> conditionsLike,
+			String betweenPropertyName, Object betweenBegin, Object betweenEnd ) {
 		Order[] ordersArray = toOrderArray(orders);
-		List<Customer> custs = this.custDao.listCustByUserEqAndLike(alias, pagevo.getOffset(), pagevo.getPageSize(), conditionsEq, conditionsLike, ordersArray);
+		List<Customer> custs = this.custDao.listCustByUserEqAndLike(alias, pagevo.getOffset(),
+				pagevo.getPageSize(), conditionsEq, conditionsLike, betweenPropertyName, betweenBegin, betweenEnd, ordersArray);
 		pagevo.setData(custs);
+		pagevo.setTotalRecord(this.custDao.countEqAndLike(alias, conditionsEq, conditionsLike, betweenPropertyName, betweenBegin, betweenEnd));
 		return pagevo;
 	}
 

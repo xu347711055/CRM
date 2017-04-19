@@ -24,4 +24,7 @@ public interface ContactDao extends BaseDao<Contact> {
 	public List<Contact> listContacts(int offset, int pageSize
 			, Map<String,Object> conditionsEq, Map<String,Object> conditionLike, 
 			Map<String,List<Object>> orLike, Map<String, List<Object>> orEq);
+	
+	public Integer countEqAndLike(Map<String, Object> conditionsEq, Map<String, Object> conditionLike,
+			Map<String, List<Object>> orLike, Map<String, List<Object>> orEq);
 }

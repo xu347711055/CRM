@@ -56,8 +56,8 @@
    						</div>
    						<label class="col-sm-2">是否主联系人</label>
    						<div class="col-sm-4">
-					    	<input type="radio" name="ctState" id="optionsRadios3" value="1" >是
-					    	<input type="radio" name="ctState" id="optionsRadios4" value="0" checked>否
+					    	<input type="radio" name="mainContact" id="optionsRadios3" value="1" >是
+					    	<input type="radio" name="mainContact" id="optionsRadios4" value="0" checked>否
    						</div>
 					</div>
 					<div class="form-group">

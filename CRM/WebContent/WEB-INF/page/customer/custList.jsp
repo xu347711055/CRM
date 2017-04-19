@@ -43,46 +43,8 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="panel-348889">
 						<div class="col-md-12 column">
-							<a id="modal-977400" href="#today-client" role="button" class="btn btn-default btn-link" data-toggle="modal">今天需要联系的客户</a>
-							<a id="modal-977400" href="#expire-client" role="button" class="btn btn-default btn-link" data-toggle="modal">过期未联系的客户</a>
-							<div class="modal fade" id="today-client" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-											<h4 class="modal-title" id="myModalLabel">
-													标题
-												</h4>
-										</div>
-										<div class="modal-body">
-											内容...
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-											<button type="button" class="btn btn-primary">保存</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="modal fade" id="expire-client" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-											<h4 class="modal-title" id="myModalLabel">
-													标题
-												</h4>
-										</div>
-										<div class="modal-body">
-											内容...
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-											<button type="button" class="btn btn-primary">保存</button>
-										</div>
-									</div>
-								</div>
-							</div>
+							<a id="modal-977400" href="doSearchTodayCust.action" class="btn btn-default btn-link" >今天需要联系的客户</a>
+							<a id="modal-977400" href="#expire-client" class="btn btn-default btn-link" >过期未联系的客户</a>
 						</div>
 					</div>
 				</div>
@@ -178,14 +140,14 @@
 				<tbody>
 				<s:iterator value="custList" var="item">
 					<tr>
-					<td><a class="btn btn-link" href="updateCust.action?id=${item.id}">${item.cnumber}</a></td>
+					<td><a class="btn btn-link" href="updateCust.action?id=${item.id}&resultType=${resultType }">${item.cnumber}</a></td>
 					<td>${item.cname}</td>
 					<td>${item.telephone}</td>
 					<td>${item.email}</td>
 					<td>${item.contactDate}</td>
 					<s:iterator value="#item.contacts" var="ct">
 						<s:if test="#ct.mainContact==1">
-							<td><a href="updateContact.action?id=${ct.id }&custId=${item.id }&resultType=custManage">${ct.name}</a></td>
+							<td><a href="updateContact.action?id=${ct.id }&custId=${item.id }&resultType=${resultType }">${ct.name}</a></td>
 						</s:if>
 					</s:iterator>
 					</tr>

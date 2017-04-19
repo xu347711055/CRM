@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
+import com.xu.common.Constants.Constant;
 import com.xu.common.domain.City;
 import com.xu.customer.domain.Customer;
 import com.xu.customer.service.CustService;
@@ -21,7 +22,8 @@ import com.xu.user.service.UserService;
 @ParentPackage("cms")
 @Namespace("/customer")
 @Action("doUpdateCust")
-@Results({@Result(name="success",location="custManage.action",type="redirect"),
+@Results({@Result(name=Constant.ResultType_ListCustMain, location="/"+Constant.ResultType_ListCustMain+".action",type="redirect"),
+	@Result(name=Constant.ResultType_ListCustManage, location=Constant.ResultType_ListCustManage+".action",type="redirect"),
 	@Result(name="fail",location="updateCust.action",type="redirect")})
 public class DoUpdateCustAction implements ModelDriven<Customer> {
 	@Autowired
@@ -32,6 +34,7 @@ public class DoUpdateCustAction implements ModelDriven<Customer> {
 	private String cityId;
 	private String[] account;
 	private String creater;
+	private String resultType;
 	
 	public String execute(){
 		System.out.println(customer);
@@ -53,7 +56,15 @@ public class DoUpdateCustAction implements ModelDriven<Customer> {
 		}
 		customer.setUpdater(updater);
 		custService.merge(customer);
-		return "success";
+		return resultType;
+	}
+
+	public String getResultType() {
+		return resultType;
+	}
+
+	public void setResultType(String resultType) {
+		this.resultType = resultType;
 	}
 
 	public Customer getCustomer() {

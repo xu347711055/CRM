@@ -20,11 +20,20 @@ public class UpdateCustAction implements ModelDriven<Customer> {
 	private CustService custService;
 	private Customer customer = new Customer();
 	private String formatedDate;
+	private String resultType;
 	
 	public String execute(){
 		customer = custService.get(Customer.class, customer.getId());
 		formatedDate = CommonUtil.dateConvert(customer.getContactDate());
 		return"success";
+	}
+
+	public String getResultType() {
+		return resultType;
+	}
+
+	public void setResultType(String resultType) {
+		this.resultType = resultType;
 	}
 
 	@Override

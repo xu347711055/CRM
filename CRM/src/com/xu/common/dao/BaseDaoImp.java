@@ -107,7 +107,7 @@ public class BaseDaoImp<T> implements BaseDao<T> {
 				}
 				c.setProjection(Projections.rowCount());
 				Long countL = (Long)c.uniqueResult();
-				return countL.intValue() ;
+				return countL.intValue();
 			}
 		});
 	}

@@ -7,16 +7,18 @@ import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
 import com.xu.common.dao.BaseDaoImp;
+import com.xu.common.domain.PieChartData;
 import com.xu.customer.domain.Customer;
 
 @Repository
@@ -102,7 +104,8 @@ public class CustDaoImpl extends BaseDaoImp<Customer> implements CustDao {
 
 	@Override
 	public List<Customer> listCustByUserEqAndLike(Map<String, String> alias, int offset, int pageSize,
-			Map<String, Object> conditionsEq, Map<String, Object> conditionsLike, Order... orders) {
+			Map<String, Object> conditionsEq, Map<String, Object> conditionsLike,
+			String betweenPropertyName, Object betweenBegin, Object betweenEnd, Order... orders) {
 		return this.template.execute(new HibernateCallback<List<Customer>>() {
 
 			@Override
@@ -113,12 +116,18 @@ public class CustDaoImpl extends BaseDaoImp<Customer> implements CustDao {
 						c.createAlias(entry.getKey(), entry.getValue());
 					}
 				}
-				for(Entry<String, Object> entry : conditionsEq.entrySet()){
-					c.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+				if(conditionsEq!=null){
+					for(Entry<String, Object> entry : conditionsEq.entrySet()){
+						c.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+					}
 				}
-				for(Entry<String, Object> entry : conditionsLike.entrySet()){
-					System.out.println("*************like:"+entry.getValue()+"%");
-					c.add(Restrictions.like(entry.getKey(), entry.getValue()+"%"));
+				if(conditionsLike!=null){
+					for(Entry<String, Object> entry : conditionsLike.entrySet()){
+						c.add(Restrictions.like(entry.getKey(), entry.getValue()+"%"));
+					}
+				}
+				if(betweenPropertyName!=null&&betweenBegin!=null&&betweenEnd!=null){
+					c.add(Restrictions.between(betweenPropertyName, betweenBegin, betweenEnd));
 				}
 				if(orders!=null){
 					for( Order order: orders){
@@ -145,5 +154,63 @@ public class CustDaoImpl extends BaseDaoImp<Customer> implements CustDao {
 		});
 		
 	}
-	
+
+	@Override
+	public Integer countEqAndLike(Map<String, String> alias, Map<String, Object> conditionsEq,
+			Map<String, Object> conditionsLike, String betweenPropertyName, Object betweenBegin, Object betweenEnd) {
+		return this.template.execute(new HibernateCallback<Integer>() {
+
+			@Override
+			public Integer doInHibernate(Session session) throws HibernateException {
+				Criteria c = session.createCriteria(Customer.class);
+				if(alias!=null){
+					for(Map.Entry<String, String> entry:alias.entrySet()){
+						c.createAlias(entry.getKey(), entry.getValue());
+					}
+				}
+				if(conditionsEq!=null){
+					for(Entry<String, Object> entry : conditionsEq.entrySet()){
+						c.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+					}
+				}
+				if(conditionsLike!=null){
+					for(Entry<String, Object> entry : conditionsLike.entrySet()){
+						c.add(Restrictions.like(entry.getKey(), entry.getValue()+"%"));
+					}
+				}
+				if(betweenPropertyName!=null&&betweenBegin!=null&&betweenEnd!=null){
+					c.add(Restrictions.between(betweenPropertyName, betweenBegin, betweenEnd));
+				}
+				c.setProjection(Projections.rowCount());
+				Long countL = (Long)c.uniqueResult();
+				return countL.intValue();
+			}
+		});
+	}
+
+	@Override
+	public List<PieChartData> listCustsByGroup(Map<String, String> alias, Criterion[] criterion, String groupCol) {
+		return this.template.execute(new HibernateCallback<List<PieChartData>>() {
+
+			@Override
+			public List<PieChartData> doInHibernate(Session session) throws HibernateException {
+				Criteria c = session.createCriteria(Customer.class);
+				if(alias!=null){
+					for(Map.Entry<String, String> entry:alias.entrySet()){
+						c.createAlias(entry.getKey(), entry.getValue());
+					}
+				}
+				if(criterion!=null){
+					for(Criterion crion: criterion){
+						if(crion!=null){
+							c.add(crion);
+						}
+					}
+				}
+				
+				return c.list();
+			}
+		});
+	}
+
 }

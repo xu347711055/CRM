@@ -35,4 +35,5 @@ public interface ContactService extends BaseService<Contact> {
 			Map<String, Object> conditionLike, Map<String, List<Object>> orLike, 
 			Map<String, List<Object>> orEq, Map<String, String> orders);
 	
+	
 }

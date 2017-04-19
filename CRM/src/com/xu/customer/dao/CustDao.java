@@ -7,6 +7,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 
 import com.xu.common.dao.BaseDao;
+import com.xu.common.domain.PieChartData;
 import com.xu.customer.domain.Customer;
 
 public interface CustDao extends BaseDao<Customer> {
@@ -18,8 +19,15 @@ public interface CustDao extends BaseDao<Customer> {
 	public int getCountByDic(String key , String value);
 	
 	public List<Customer> listCustByUserEqAndLike(Map<String,String> alias,int offset, int pageSize,  
-			 Map<String, Object> conditionsEq, Map<String, Object> conditionsLike, Order...orders);
+			 Map<String, Object> conditionsEq, Map<String, Object> conditionsLike, 
+			 String betweenPropertyName, Object betweenBegin, Object betweenEnd,Order...orders);
+	public Integer countEqAndLike(Map<String,String> alias, Map<String, Object> conditionsEq,
+			Map<String, Object> conditionsLike, String betweenPropertyName, Object betweenBegin, 
+			Object betweenEnd);
+		
+	public List<PieChartData> listCustsByGroup(Map<String,String> alias, Criterion[] criterion , String groupCol);
 	
 	public Integer addStrategy(int custId, String content);
+	
 	
 }

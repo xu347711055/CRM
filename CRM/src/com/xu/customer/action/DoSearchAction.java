@@ -64,12 +64,12 @@ public class DoSearchAction {
 			conditions.put("level", level);
 		}
 		if(user.getAdmin()==1){
-			pagevo = custService.listCustByUserEqAndLike(null, conditions, pagevo, orders, conditionsLike);
+			pagevo = custService.listCustByUserEqAndLike(null, conditions, pagevo, orders, conditionsLike,null,null,null);
 		}else{
 			conditions.put("o.id", user.getId());
 			Map<String,String> alias = new HashMap<>();
 			alias.put("owner", "o");
-			pagevo = custService.listCustByUserEqAndLike(alias, conditions, pagevo, orders, conditionsLike);
+			pagevo = custService.listCustByUserEqAndLike(alias, conditions, pagevo, orders, conditionsLike,null,null,null);
 		}
 		custList = pagevo.getData();
 		return "success";

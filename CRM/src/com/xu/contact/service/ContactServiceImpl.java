@@ -114,6 +114,7 @@ public class ContactServiceImpl extends BaseServiceImpl<Contact> implements Cont
 		
 		pagevo.setData(this.contactDao.listContacts(pagevo.getOffset(), pagevo.getPageSize()
 				, conditionEq, conditionLike, orLike, orEq));
+		pagevo.setTotalRecord(this.contactDao.countEqAndLike(conditionEq, conditionLike, orLike, orEq));
 		return pagevo;
 	}
 	
