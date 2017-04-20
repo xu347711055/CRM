@@ -44,8 +44,7 @@
 						</li>
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
-								<img src="${path }/images/0.jpg" />
-								<span>beginner</span>
+								<span>欢迎,${username }</span>
 							</a>
 							<dl class="layui-nav-child">
 								<dd>
@@ -60,7 +59,7 @@
 									</a>
 								</dd>
 								<dd>
-									<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+									<a href="${path }/user/login.action"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 								</dd>
 							</dl>
 						</li>

@@ -13,6 +13,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.xu.common.Constants.Constant;
 import com.xu.common.page.PageVO;
 import com.xu.common.util.CommonUtil;
 import com.xu.customer.domain.Customer;
@@ -33,6 +34,7 @@ public class DoSearchTodayCustAction {
 	private CustService custService;
 	private List<Customer> custList;
 	private PageVO<Customer> pagevo = new PageVO<>();
+	private String resultType = Constant.ResultType_ListCustManage;
 	
 	public String execute() throws ParseException{
 		Map<String, Date> timeScope = CommonUtil.getTodayTimeScope();
@@ -52,6 +54,14 @@ public class DoSearchTodayCustAction {
 		}
 		custList = pagevo.getData();
 		return "success";
+	}
+
+	public String getResultType() {
+		return resultType;
+	}
+
+	public void setResultType(String resultType) {
+		this.resultType = resultType;
 	}
 
 	public List<Customer> getCustList() {

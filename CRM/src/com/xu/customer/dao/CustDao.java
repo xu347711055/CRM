@@ -25,9 +25,12 @@ public interface CustDao extends BaseDao<Customer> {
 			Map<String, Object> conditionsLike, String betweenPropertyName, Object betweenBegin, 
 			Object betweenEnd);
 		
-	public List<PieChartData> listCustsByGroup(Map<String,String> alias, Criterion[] criterion , String groupCol);
+	public List<PieChartData> listCustsByUserGroup(String custAlias, String userAlias, 
+			Map<String, Object> conditions , String groupCol) throws Exception;
 	
 	public Integer addStrategy(int custId, String content);
 	
+	public void delCust(int custId, int userId);
 	
+	public void adminDelCust(int custId);
 }

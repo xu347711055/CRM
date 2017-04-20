@@ -25,6 +25,7 @@ public class DoLoginAction {
 	private String account;
 	private String password;
 	private String msg;
+	private String username;
 	
 	public String execute() throws Exception{
 		User user = userService.checkLogin(account, password);
@@ -33,7 +34,16 @@ public class DoLoginAction {
 			return "success";
 		}
 		this.msg = "用户名或密码错误";
+		this.username = user.getName();
 		return "fail";
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getAccount() {

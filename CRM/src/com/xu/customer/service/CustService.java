@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xu.common.domain.Dictionary;
+import com.xu.common.domain.PieChartData;
 import com.xu.common.page.PageVO;
 import com.xu.common.service.BaseService;
 import com.xu.customer.domain.Customer;
@@ -24,4 +25,11 @@ public interface CustService extends BaseService<Customer> {
 			String betweenPropertyName, Object betweenBegin, Object betweenEnd);
 	
 	public int addStrategy(int custId, String content);
+	
+	public List<PieChartData> getPieChartData(String custAlias, String userAlias, Map<String,Object> conditions
+			, String groupCol) throws Exception;
+	
+	public void delCust(int custId, int userId);
+	
+	public void adminDelCust(int custId);
 }

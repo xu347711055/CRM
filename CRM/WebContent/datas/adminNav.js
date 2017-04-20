@@ -20,6 +20,10 @@ var navs = [{
 	"icon": "&#x1002;",
 	"spread": false,
 	"children": [{
+		"title": "客户分析图表",
+		"icon": "fa-check-square-o",
+		"href": "/CRM/statistic/custChart.action"
+	},{
 		"title": "客户来源组成",
 		"icon": "fa-check-square-o",
 		"href": "/CRM/statistic/analyse.action?code=source&chartName=客户来源组成"

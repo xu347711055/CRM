@@ -63,26 +63,20 @@ public class LoadMainAction {
 		List<Contact> filteredDate = new ArrayList<>();
 		SimpleDateFormat format = new SimpleDateFormat("MM-dd");
 		String dateStr = format.format(new Date());
-		System.out.println("dateStr:"+dateStr);
 		String[] split = dateStr.split("-");
 		int curMonth = Integer.parseInt(split[0]);
-		System.out.println("curMonth"+curMonth);
 		int curDay = Integer.parseInt(split[1]);
-		System.out.println("curDay"+curDay);
 		for(Contact c : data){
 			if(c.getBirthday()!=null){
 				String birthStr = format.format(c.getBirthday());
 				String[] splitBirth = birthStr.split("-");
 				int month = Integer.parseInt(splitBirth[0]);
-				System.out.println(c.getName()+"month:"+month);
 				int day = Integer.parseInt(splitBirth[1]);
-				System.out.println(c.getName()+"day:"+day);
 				if(curMonth==month&&curDay==day){
 					filteredDate.add(c);
 				}
 			}
 		}
-		System.out.println(filteredDate);
 		contPagevo.setData(filteredDate);
 		contPagevo.setTotalRecord(filteredDate.size());
 		return "success";

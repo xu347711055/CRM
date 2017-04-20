@@ -14,6 +14,8 @@ import com.xu.user.domain.User;
 	@Result(name="user",location="index.jsp")})
 @Action("mainAction")
 public class MainAction {
+	
+	private String username;
 	public String execute(){
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		if(user==null){
@@ -22,7 +24,14 @@ public class MainAction {
 		if(user.getAdmin()!=1){
 			return "user";
 		}
+		username = user.getName();
 		return "admin";
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 }

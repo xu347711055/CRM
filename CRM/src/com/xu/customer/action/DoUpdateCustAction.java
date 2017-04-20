@@ -55,6 +55,7 @@ public class DoUpdateCustAction implements ModelDriven<Customer> {
 			customer.setCreator(userService.get(User.class, Integer.valueOf(creater)));
 		}
 		customer.setUpdater(updater);
+		customer.setState(1);
 		custService.merge(customer);
 		return resultType;
 	}

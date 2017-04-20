@@ -117,6 +117,9 @@
 				<thead>
 					<tr>
 						<th>
+							操作
+						</th>
+						<th>
 							客户编号
 						</th>
 						<th>
@@ -140,6 +143,7 @@
 				<tbody>
 				<s:iterator value="custList" var="item">
 					<tr>
+					<td><button class="btn btn-primary" data-target="#options" data-toggle="modal" onclick="optionClick(${item.id })">选项</button></td>
 					<td><a class="btn btn-link" href="updateCust.action?id=${item.id}&resultType=${resultType }">${item.cnumber}</a></td>
 					<td>${item.cname}</td>
 					<td>${item.telephone}</td>
@@ -159,6 +163,53 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="options" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+				<a class="btn btn-link" id="delCust">删除此档案</a>
+				<a class="btn btn-link" id="shareCust" data-target="#share" data-toggle="modal">共享此档案</a>
+				<a class="btn btn-link" id="changeOwner">转移此客户所属人</a>
+			</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            	<h4 class="modal-title" id="myModalLabel">共享此客户给以下用户</h4>
+            </div>
+				<form id="modalForm" role="form">
+            <div class="modal-body">
+				<div class="col-sm-12 column" id="modalBody">
+				<input name="custId" type="hidden" id="formInput">
+				<div class="form-group">
+					<select id="dept" name="dept" class="form-control">
+						<option>--请选择部门--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<select id="user" name="user" class="form-control">
+						<option>--请选择用户--</option>
+					</select>
+				</div>
+				</div>
+			</div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">保存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+                </form> 
+        </div>
+    </div>
+</div>
 </div>
 
 	<script src="${path }/bootstrap/js/jquery.min.js"></script>
@@ -166,6 +217,24 @@
 	<script type="text/javascript" src="${path }/plugins/layui/layui.js"></script>
 	</body>
 	<script type="text/javascript">
+	
+	$.getJSON("http://localhost:8080/CRM/dept/getDept.action",function(data){
+		$.each(data,function(index,obj){
+			var Opt = $("<option></option>");
+			Opt.attr("value",obj.id).text(obj.name);
+			$("#dept").append(Opt);	
+		});
+	});
+	function optionClick(custId){
+		$("#delCust").click(function(){
+			var flag = window.confirm("您确定要删除？");
+			if(flag==true){
+				window.location.href="delCust.action?custId="+custId;
+			}
+		});
+		$("#formInput").attr("value",cusId);
+		$("#modalForm").attr("action","customer/shareCust.action")
+	}
 	
 	$.getJSON("http://localhost:8080/CRM/getDicData.action",function(data){
 		/* $.each(data, function(index,obj) {

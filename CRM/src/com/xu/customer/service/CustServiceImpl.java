@@ -1,7 +1,6 @@
 package com.xu.customer.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xu.common.domain.Dictionary;
+import com.xu.common.domain.PieChartData;
 import com.xu.common.page.PageVO;
 import com.xu.common.service.BaseServiceImpl;
 import com.xu.common.util.SpringUtil;
@@ -92,16 +92,35 @@ public class CustServiceImpl extends BaseServiceImpl<Customer>  implements CustS
 		return this.custDao.addStrategy(custId, content);
 	}
 	
-	public static void main(String[] args) {
-		CustService service = SpringUtil.getBean(CustService.class);
-		PageVO<Customer> pagevo = new PageVO<>();
-		Map<String, Object> conditions = new HashMap<>();
-		java.sql.Date date = new java.sql.Date(new Date().getTime());
-		System.out.println(date);
-		conditions.put("contactDate", date);
-		pagevo = service.listByPage(Customer.class, pagevo, conditions, null);
-		for(Customer c : pagevo.getData()){
-			System.out.println(c);
-		}
+	@Override
+	public List<PieChartData> getPieChartData(String custAlias, String userAlias, Map<String, Object> conditions, String groupCol) throws Exception {
+		return this.custDao.listCustsByUserGroup(custAlias, userAlias, conditions, groupCol);
+		
 	}
+	
+	public static void main(String[] args) throws Exception {
+		CustService service = SpringUtil.getBean(CustService.class);
+		Map<String, Object> conditions = new HashMap<>();
+		Map<String, String> alias = new HashMap<>();
+		alias.put("customer", "c");
+		alias.put("user", "u");
+		conditions.put("u.id", 1);
+		service.getPieChartData("u", "c", conditions, "companyNature");
+	}
+
+
+
+	@Override
+	public void delCust(int custId, int userId) {
+		this.custDao.delCust(custId, userId);
+	}
+
+
+
+	@Override
+	public void adminDelCust(int custId) {
+		this.custDao.adminDelCust(custId);
+	}
+
+
 }

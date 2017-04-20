@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.xu.common.Constants.Constant;
 import com.xu.common.page.PageVO;
 import com.xu.customer.domain.Customer;
 import com.xu.customer.service.CustService;
@@ -34,6 +35,7 @@ public class DoSearchAction {
 	private String level;
 	private Date contactDate;
 	private String source;
+	private String resultType = Constant.ResultType_ListCustManage;
 	
 	public String execute(){
 		User user = (User) ActionContext.getContext().getSession().get("user");
@@ -74,6 +76,17 @@ public class DoSearchAction {
 		custList = pagevo.getData();
 		return "success";
 	}
+
+	
+	public String getResultType() {
+		return resultType;
+	}
+
+	public void setResultType(String resultType) {
+		this.resultType = resultType;
+	}
+
+
 
 	public PageVO<Customer> getPagevo() {
 		return pagevo;

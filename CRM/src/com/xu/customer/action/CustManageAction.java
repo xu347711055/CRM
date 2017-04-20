@@ -38,13 +38,15 @@ public class CustManageAction implements ModelDriven<PageVO<Customer>>{
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		Map<String,String> orders = new HashMap<>();
 		orders.put("id", "asc");
+		Map<String,Object> conditions = new HashMap<>();
 		if(user.getAdmin()==1){
-			pagevo = custService.listByPage(Customer.class, pagevo, null, orders);
+			conditions.put("state", 1);
+			pagevo = custService.listByPage(Customer.class, pagevo, conditions, orders);
 		}else{
-			Map<String,Object> conditions = new HashMap<>();
-			conditions.put("o.id", user.getId());
 			Map<String,String> alias = new HashMap<>();
 			alias.put("owner", "o");
+			conditions.put("state", 1);
+			conditions.put("o.id", user.getId());
 			pagevo = custService.listCustByUser(alias, conditions, pagevo, orders);
 		}
 		custList = pagevo.getData();

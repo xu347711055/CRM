@@ -34,18 +34,14 @@
 					</div>
 					<ul class="layui-nav admin-header-item">
 						<li class="layui-nav-item">
-							<a href="javascript:;">清除缓存</a>
+							<a href="javascript:;">公司主页</a>
 						</li>
 						<li class="layui-nav-item">
-							<a href="javascript:;">浏览网站</a>
-						</li>
-						<li class="layui-nav-item" id="video1">
-							<a href="javascript:;">视频</a>
+							<a href="javascript:;">其他入口</a>
 						</li>
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
-								<img src="${path }/images/0.jpg" />
-								<span>beginner</span>
+								<span>欢迎，${username }</span>
 							</a>
 							<dl class="layui-nav-child">
 								<dd>
@@ -60,14 +56,14 @@
 									</a>
 								</dd>
 								<dd>
-									<a href="user/login.action"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+									<a href="${path }/user/login.action"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 								</dd>
 							</dl>
 						</li>
 					</ul>
 					<ul class="layui-nav admin-header-item-mobile">
 						<li class="layui-nav-item">
-							<a href="user/login.action"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+							<a href="${path }/user/login.action"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 						</li>
 					</ul>
 				</div>
