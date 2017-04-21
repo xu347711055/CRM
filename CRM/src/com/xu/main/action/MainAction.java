@@ -21,10 +21,10 @@ public class MainAction {
 		if(user==null){
 			return "login";
 		}
+		username = user.getName();
 		if(user.getAdmin()!=1){
 			return "user";
 		}
-		username = user.getName();
 		return "admin";
 	}
 	public String getUsername() {

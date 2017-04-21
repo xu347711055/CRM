@@ -64,6 +64,14 @@
        <filter-name>OpenSessionInViewFilter</filter-name>
        <url-pattern>/loadMainAction.action</url-pattern>
    </filter-mapping>
+   <filter-mapping>
+       <filter-name>OpenSessionInViewFilter</filter-name>
+       <url-pattern>/user/getUserByDept.action</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+       <filter-name>OpenSessionInViewFilter</filter-name>
+       <url-pattern>/customer/shareCust.action</url-pattern>
+   </filter-mapping>
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>

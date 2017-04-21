@@ -33,4 +33,8 @@ public interface CustDao extends BaseDao<Customer> {
 	public void delCust(int custId, int userId);
 	
 	public void adminDelCust(int custId);
+	
+	public List<Customer> listByPageWithState(int state ,int pageSize, int offset);
+	
+	public Integer countByPageWithState(int state);
 }

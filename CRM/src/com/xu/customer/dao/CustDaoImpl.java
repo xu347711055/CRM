@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -272,6 +273,37 @@ public class CustDaoImpl extends BaseDaoImp<Customer> implements CustDao {
 				SQLQuery query = session.createSQLQuery(sql);
 				query.setInteger(0, custId);
 				return query.executeUpdate();
+			}
+		});
+	}
+
+	@Override
+	public List<Customer> listByPageWithState(int state, int pageSize, int offset) {
+		return this.template.execute(new HibernateCallback<List<Customer>>() {
+
+			@Override
+			public List<Customer> doInHibernate(Session session) throws HibernateException {
+				SQLQuery query = session.createSQLQuery("select * from customer where state=? limit ?,?");
+				query.addEntity(Customer.class);
+				query.setInteger(0, state);
+				query.setInteger(1, offset);
+				query.setInteger(2, pageSize);
+				return query.list();
+			}
+			
+		});
+	}
+
+	@Override
+	public Integer countByPageWithState(int state) {
+		return this.template.execute(new HibernateCallback<Integer>() {
+
+			@Override
+			public Integer doInHibernate(Session session) throws HibernateException {
+				SQLQuery query = session.createSQLQuery("select count(id) from customer where state=?");
+				query.setInteger(0, state);
+				BigInteger result = (BigInteger) query.uniqueResult();
+				return result.intValue();
 			}
 		});
 	}

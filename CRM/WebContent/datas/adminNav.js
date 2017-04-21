@@ -1,14 +1,14 @@
 var navs = [{
 	"title": "客户管理",
-	"icon": "fa-cubes",
+	"icon": "&#xe613;",
 	"spread": true,
 	"children": [{
 		"title": "客户档案",
-		"icon": "&#xe641;",
+		"icon": "&#xe622;",
 		"href": "/CRM/customer/custManage.action"
 	}, {
 		"title": "联系人管理",
-		"icon": "&#xe63c;",
+		"icon": "&#xe63b;",
 		"href": "/CRM/customer/listContByUser.action"
 	}, {
 		"title": "联系记录",
@@ -17,7 +17,7 @@ var navs = [{
 	}]
 }, {
 	"title": "统计分析",
-	"icon": "&#x1002;",
+	"icon": "&#xe62c;",
 	"spread": false,
 	"children": [{
 		"title": "客户分析图表",
@@ -42,11 +42,11 @@ var navs = [{
 	"spread": false,
 	"children": [{
 		"title": "用户管理",
-		"icon": "fa-table",
+		"icon": "&#xe612;",
 		"href": "/CRM/system/listUser.action"
 	}, {
 		"title": "权限管理",
-		"icon": "fa-navicon",
+		"icon": "&#xe631;",
 		"href": "/CRM/system/listRole.action"
 	}, {
 		"title": "部门管理",

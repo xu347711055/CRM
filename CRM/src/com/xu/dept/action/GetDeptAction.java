@@ -19,18 +19,14 @@ import com.xu.user.domain.User;
 @ParentPackage("json-default")
 @Action("getDept")
 @Namespace("/dept")
-@Results({@Result(name="success",type="json",params={"root","depts"}),
-	@Result(name="noAuth",location="user/login.action",type="redirect")})//不是管理员则跳回登陆页
+@Result(name="success",type="json",params={"root","depts"})//不是管理员则跳回登陆页
 public class GetDeptAction {
 	@Autowired
 	private DeptService deptService;
 	private List<Department> depts;
 	
 	public String execute(){
-		User user = (User) ActionContext.getContext().getSession().get("user");
-		if(user.getAdmin()!=1){
-			return "noAuth"; 
-		}
+		
 		Map<String,String> orders = new HashMap<>();
 		orders.put("id", "asc");
 		depts = deptService.list(null, Department.class, orders);

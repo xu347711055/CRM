@@ -24,7 +24,7 @@ public class DoAddUserAction implements ModelDriven<User> {
 	@Autowired
 	private UserService userService;
 	private User user = new User();
-	private String deptId;
+	private int deptId;
 	private String msg;
 	
 	public String execute() throws Exception{
@@ -33,7 +33,7 @@ public class DoAddUserAction implements ModelDriven<User> {
 			return "noAuth"; 
 		}
 		Department dept = new Department();
-		dept.setId(Integer.valueOf(deptId));
+		dept.setId(deptId);
 		User userExsist = userService.get(User.class, "account", user.getAccount());
 		if(userExsist!=null){
 			msg = "该用户名已存在";
@@ -41,6 +41,7 @@ public class DoAddUserAction implements ModelDriven<User> {
 		}
 		String password = user.getPassword();
 		user.setPassword(MD5Util.md5(password));
+		user.setDept(dept);
 		userService.add(user);
 		System.out.println(user);
 		return "success";
@@ -62,11 +63,11 @@ public class DoAddUserAction implements ModelDriven<User> {
 		this.user = user;
 	}
 
-	public String getDeptId() {
+	public int getDeptId() {
 		return deptId;
 	}
 
-	public void setDeptId(String deptId) {
+	public void setDeptId(int deptId) {
 		this.deptId = deptId;
 	}
 

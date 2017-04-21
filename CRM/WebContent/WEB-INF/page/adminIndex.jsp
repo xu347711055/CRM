@@ -33,7 +33,7 @@
 						</div>
 					</div>
 					<ul class="layui-nav admin-header-item">
-						<li class="layui-nav-item">
+						<!-- <li class="layui-nav-item">
 							<a href="javascript:;">清除缓存</a>
 						</li>
 						<li class="layui-nav-item">
@@ -41,7 +41,7 @@
 						</li>
 						<li class="layui-nav-item" id="video1">
 							<a href="javascript:;">视频</a>
-						</li>
+						</li> -->
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
 								<span>欢迎,${username }</span>
@@ -50,9 +50,9 @@
 								<dd>
 									<a href="javascript:;"><i class="fa fa-user-circle" aria-hidden="true"></i> 个人信息</a>
 								</dd>
-								<dd>
+							<!-- 	<dd>
 									<a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a>
-								</dd>
+								</dd> -->
 								<dd id="lock">
 									<a href="javascript:;">
 										<i class="fa fa-lock" aria-hidden="true" style="padding-right: 3px;padding-left: 1px;"></i> 锁屏 (Alt+L)

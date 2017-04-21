@@ -44,7 +44,7 @@
 					<div class="tab-pane active" id="panel-348889">
 						<div class="col-md-12 column">
 							<a id="modal-977400" href="doSearchTodayCust.action" class="btn btn-default btn-link" >今天需要联系的客户</a>
-							<a id="modal-977400" href="#expire-client" class="btn btn-default btn-link" >过期未联系的客户</a>
+<!-- 							<a id="modal-977400" href="#expire-client" class="btn btn-default btn-link" >过期未联系的客户</a> -->
 						</div>
 					</div>
 				</div>
@@ -110,7 +110,7 @@
 						<span class="glyphicon glyphicon-list-alt" style="color: rgb(9, 109, 169);">客户列表</span><br />
 						<div class="btn-group btn-group-md">
 				 			<a class="btn btn-info" href="addCust.action"><em class="glyphicon glyphicon-plus"></em> 新建</a> 
-				 			<button class="btn btn-info" type="button"><em class="glyphicon glyphicon-user"></em> 共享</button>
+<!-- 				 			<button class="btn btn-info" type="button"><em class="glyphicon glyphicon-user"></em> 共享</button> -->
 						</div>						
 					</legend>
 					<table class="table table-hover">
@@ -172,7 +172,7 @@
             <div class="modal-body">
 				<a class="btn btn-link" id="delCust">删除此档案</a>
 				<a class="btn btn-link" id="shareCust" data-target="#share" data-toggle="modal">共享此档案</a>
-				<a class="btn btn-link" id="changeOwner">转移此客户所属人</a>
+				<a class="btn btn-link" id="changeOwner" data-target="#share" data-toggle="modal">转移此客户所属人</a>
 			</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -186,27 +186,28 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             	<h4 class="modal-title" id="myModalLabel">共享此客户给以下用户</h4>
             </div>
-				<form id="modalForm" role="form">
+				<form id="modalForm" role="form" method="post">
             <div class="modal-body">
 				<div class="col-sm-12 column" id="modalBody">
 				<input name="custId" type="hidden" id="formInput">
+				<input name="shareType" type="hidden" id="shareType">
 				<div class="form-group">
-					<select id="dept" name="dept" class="form-control">
+					<select id="dept" name="deptId" class="form-control">
 						<option>--请选择部门--</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<select id="user" name="user" class="form-control">
+					<select id="user" name="userId" class="form-control">
 						<option>--请选择用户--</option>
 					</select>
 				</div>
 				</div>
 			</div>
+           </form> 
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" data-dismiss="modal">保存</button>
+                <button type="button" class="btn btn-primary" onclick="submitShare()">保存</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
-                </form> 
         </div>
     </div>
 </div>
@@ -217,14 +218,46 @@
 	<script type="text/javascript" src="${path }/plugins/layui/layui.js"></script>
 	</body>
 	<script type="text/javascript">
+	$("#shareCust").click(function(){
+		$("#modalForm").attr("action","shareCust.action");
+	});
 	
-	$.getJSON("http://localhost:8080/CRM/dept/getDept.action",function(data){
+	$("#changeOwner").click(function(){
+		$("#modalForm").attr("action","shareCust.action");
+		$("#shareType").attr("value","changeOwner");
+	}); 
+	
+	function submitShare(){
+		if(window.confirm('确定提交？')){
+			$("#modalForm").submit();
+		}
+	}
+	
+	$.getJSON("${path }/dept/getDept.action",function(data){
 		$.each(data,function(index,obj){
 			var Opt = $("<option></option>");
 			Opt.attr("value",obj.id).text(obj.name);
 			$("#dept").append(Opt);	
 		});
 	});
+	
+	$("#dept").change(function(){
+		var deptId = $(this).val();
+		getUserByDeptId(deptId);
+	});
+	
+	function getUserByDeptId(deptId){
+		$.getJSON("${path }/user/getUserByDept.action?deptId="+deptId,function(data){
+			$("#user").empty();
+			$("#user").append($("<option>--请选择用户--</option>"));
+			$.each(data,function(index,obj){
+				var Opt = $("<option></option>");
+				Opt.attr("value",obj.id).text(obj.name);
+				$("#user").append(Opt);	
+			});
+		});
+	}
+	
 	function optionClick(custId){
 		$("#delCust").click(function(){
 			var flag = window.confirm("您确定要删除？");
@@ -232,8 +265,7 @@
 				window.location.href="delCust.action?custId="+custId;
 			}
 		});
-		$("#formInput").attr("value",cusId);
-		$("#modalForm").attr("action","customer/shareCust.action")
+		$("#formInput").attr("value",custId);
 	}
 	
 	$.getJSON("http://localhost:8080/CRM/getDicData.action",function(data){

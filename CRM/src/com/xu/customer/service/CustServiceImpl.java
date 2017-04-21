@@ -123,4 +123,14 @@ public class CustServiceImpl extends BaseServiceImpl<Customer>  implements CustS
 	}
 
 
+
+	@Override
+	public PageVO<Customer> listByPageWithState(PageVO<Customer> pagevo, int state) {
+		pagevo.setData(this.custDao.listByPageWithState(state, pagevo.getPageSize(), pagevo.getOffset()));
+		Integer totalRecord = this.custDao.countByPageWithState(state);
+		pagevo.setTotalRecord(totalRecord);
+		return pagevo;
+	}
+
+
 }

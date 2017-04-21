@@ -1,8 +1,10 @@
 package com.xu.customer.action;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -40,8 +42,12 @@ public class CustManageAction implements ModelDriven<PageVO<Customer>>{
 		orders.put("id", "asc");
 		Map<String,Object> conditions = new HashMap<>();
 		if(user.getAdmin()==1){
-			conditions.put("state", 1);
-			pagevo = custService.listByPage(Customer.class, pagevo, conditions, orders);
+			pagevo = custService.listByPageWithState(pagevo, 1);
+			/*List<Customer> data = pagevo.getData();
+			Set<Customer> custSet = new LinkedHashSet<>();	//去重
+			custSet.addAll(data);
+			data.clear();
+			data.addAll(custSet);*/
 		}else{
 			Map<String,String> alias = new HashMap<>();
 			alias.put("owner", "o");

@@ -32,4 +32,6 @@ public interface CustService extends BaseService<Customer> {
 	public void delCust(int custId, int userId);
 	
 	public void adminDelCust(int custId);
+	
+	public PageVO<Customer> listByPageWithState(PageVO<Customer> pagevo, int state);
 }
