@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import com.xu.user.domain.User;
 @ParentPackage("cms")
 @Result(name="success",location="main.jsp")
 @Action("loadMainAction")
+@InterceptorRef("privilegeStack")
 public class LoadMainAction {
 	@Autowired
 	private ContactService contService;

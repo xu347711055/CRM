@@ -16,7 +16,12 @@
 	</head>
 	<body>
 		<div class="container">
-			<blockquote class="layui-elem-quote">${cname }联系记录</blockquote>
+			<blockquote class="layui-elem-quote">
+			<s:if test="updateType=='listRecordByCust'">
+				<a href="custManage.action" class="btn btn-link">首页 ></a>
+				<button class="btn btn-link" onclick="goback()">上一页 ></button>
+			</s:if>
+				${cname }联系记录</blockquote>
 			<form class="form-horizontal" action="doSearchRecord.action" method="post">
 			<input type="hidden" name="custId" value="${custId }"> 
 			<input type="hidden" name="cname" value="${cname }"> 
@@ -70,7 +75,7 @@
 								</td>
 								<td>${item.contactName }</td>
 								<td>${item.contactDate }</td>
-								<td><a href="">删除</a></td>
+								<td><a class="btn btn-link" onclick="del(${item.id},'${updateType }')">删除</a></td>
 							</tr>
 						</s:iterator>
 					</tbody>
@@ -80,4 +85,14 @@
 		<script src="${path}/bootstrap/js/jquery.min.js"></script>
 		<script src="${path}/bootstrap/js/bootstrap.min.js"></script>
 	</body>
+	<script type="text/javascript">
+		function goback(){
+			window.history.go(-1);
+		}
+		
+		function del(id,updateType){
+			if(window.confirm('若删除此记录，可能会影响其他用户使用，确定要删除此记录？'))
+				window.location.href='delRecord.action?id='+id+'&updateType='+updateType;
+		}
+	</script>
 </html>

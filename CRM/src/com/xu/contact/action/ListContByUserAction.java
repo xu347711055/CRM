@@ -31,9 +31,11 @@ public class ListContByUserAction implements ModelDriven<PageVO<Contact>>{
 	public String execute(){
 		user = (User) ActionContext.getContext().getSession().get("user");
 		if(user.getAdmin()==1){
+			HashMap<String, Object> condition = new HashMap<>();
+			condition.put("state", 1);
 			Map<String,String> orders = new HashMap<>();
 			orders.put("id", "asc");
-			pagevo = contactService.listByPage(Contact.class, pagevo, null, orders);
+			pagevo = contactService.listByPage(Contact.class, pagevo, condition, orders);
 		}else{
 			pagevo = contactService.getContactsByUser(user.getId(), pagevo);
 		}

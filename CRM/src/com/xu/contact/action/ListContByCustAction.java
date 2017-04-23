@@ -39,6 +39,7 @@ public class ListContByCustAction implements ModelDriven<PageVO<Contact>> {
 			cust.setId(customerId);
 		}
 		conditions.put("cust", cust);
+		conditions.put("state", 1);
 		pagevo = contactService.listByPage(Contact.class, pagevo, conditions, null);
 		customer = custService.get(Customer.class, customerId);
 		this.resultType=Constant.ResultType_ListContByCust;

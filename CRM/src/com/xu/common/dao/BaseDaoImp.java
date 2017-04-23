@@ -9,8 +9,10 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +87,10 @@ public class BaseDaoImp<T> implements BaseDao<T> {
 						c.addOrder(order);
 					}
 				}
+//				c.setFetchMode(arg0, arg1)
+//				c.setProjection(Projections.distinct(Projections.property("id")));
+//				c.setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
+//				c.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 				c.setFirstResult(offset);//设置分页开始位置
 				c.setMaxResults(pageSize);//设置分页大小
 				return c.list();

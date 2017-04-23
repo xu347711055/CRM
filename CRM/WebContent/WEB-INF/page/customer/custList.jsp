@@ -260,7 +260,7 @@
 	
 	function optionClick(custId){
 		$("#delCust").click(function(){
-			var flag = window.confirm("您确定要删除？");
+			var flag = window.confirm("删除联系人可能会影响其他用户的使用，您确定要删除？");
 			if(flag==true){
 				window.location.href="delCust.action?custId="+custId;
 			}

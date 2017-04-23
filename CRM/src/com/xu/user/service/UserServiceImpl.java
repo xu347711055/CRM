@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.xu.common.service.BaseServiceImpl;
 import com.xu.common.util.MD5Util;
-import com.xu.role.domain.Auth;
+import com.xu.privilege.domain.Auth;
 import com.xu.role.domain.Role;
 import com.xu.user.dao.UserDao;
 import com.xu.user.domain.User;

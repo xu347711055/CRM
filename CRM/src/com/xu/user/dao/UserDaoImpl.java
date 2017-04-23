@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
 import com.xu.common.dao.BaseDaoImp;
-import com.xu.role.domain.Auth;
+import com.xu.privilege.domain.Auth;
 import com.xu.role.domain.Role;
 import com.xu.user.domain.User;
 
@@ -41,8 +42,8 @@ public class UserDaoImpl extends BaseDaoImp<User> implements UserDao {
 
 			@Override
 			public List<Role> doInHibernate(Session session) throws HibernateException {
-				String hql = "from Role r inner join fetch User u where u.id=?";
-				Query query = session.createQuery(hql);
+				String sql = "select * from role r inner join user_role ur on r.id=ur.roles_id and ur.users_id=?";
+				SQLQuery query = session.createSQLQuery(sql).addEntity(Role.class);
 				query.setInteger(0,userId);
 				return query.list();
 			}

@@ -197,7 +197,7 @@ public class Customer {
 	/**
 	 * 所属人
 	 */
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name="customer_owner",
 	joinColumns={ @JoinColumn(name="cust")},
 	inverseJoinColumns={ @JoinColumn(name = "owner") })	

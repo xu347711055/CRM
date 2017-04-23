@@ -27,6 +27,7 @@ public class DoAddContactAction implements ModelDriven<Contact>{
 			customer.setId(Integer.valueOf(custId));
 		}
 		contact.setCust(customer);
+		contact.setState(1);
 		contactService.saveContact(contact);
 		return "success";
 	}

@@ -1,7 +1,7 @@
-package com.xu.role.service;
+package com.xu.privilege.service;
 
 import com.xu.common.service.BaseService;
-import com.xu.role.domain.Auth;
+import com.xu.privilege.domain.Auth;
 
 public interface AuthService extends BaseService<Auth> {
 

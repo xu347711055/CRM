@@ -34,6 +34,7 @@ public class ListRecordByCustAction {
 		cname = cust.getCname();
 		Map<String,Object> conditions = new HashMap<>();
 		conditions.put("cust", cust);
+		conditions.put("state", 1);
 		pagevo = recordService.listByPage(ContactRecord.class, pagevo, conditions, null);
 		updateType = "listRecordByCust";
 		return "success";

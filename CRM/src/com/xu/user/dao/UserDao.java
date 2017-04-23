@@ -3,7 +3,7 @@ package com.xu.user.dao;
 import java.util.List;
 
 import com.xu.common.dao.BaseDao;
-import com.xu.role.domain.Auth;
+import com.xu.privilege.domain.Auth;
 import com.xu.role.domain.Role;
 import com.xu.user.domain.User;
 

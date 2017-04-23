@@ -33,6 +33,7 @@ public class DoUpdateConAction implements ModelDriven<Contact> {
 		Customer customer = new Customer();
 		customer.setId(Integer.valueOf(custId));
 		contact.setCust(customer);
+		contact.setState(1);
 		contactService.saveContact(contact);
 		return resultType;
 	}

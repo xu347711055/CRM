@@ -1,12 +1,11 @@
 package com.xu.customer.action;
 
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -29,6 +28,7 @@ import com.xu.user.domain.User;
 @Namespace("/customer")
 @Result(name="success",location="custList.jsp")
 @Action("custManage")
+//@InterceptorRef("privilegeStack")
 public class CustManageAction implements ModelDriven<PageVO<Customer>>{
 	@Autowired
 	private CustService custService;

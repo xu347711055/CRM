@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.xu.common.util.SpringUtil;
+import com.xu.privilege.service.AuthService;
 import com.xu.role.domain.Role;
-import com.xu.role.service.AuthService;
 import com.xu.role.service.RoleService;
 import com.xu.user.domain.User;
 import com.xu.user.service.UserService;

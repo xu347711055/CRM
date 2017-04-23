@@ -82,6 +82,7 @@
 							<th>客户名称</th>
 							<th>部门</th>
 							<th>职务</th>
+							<th>操作</th>
 						</tr>
 					</thead>		
 					<tbody>
@@ -104,6 +105,7 @@
 							<td>${item.cust.cname }</td>
 							<td>${item.dept }</td>
 							<td>${item.duty }</td>
+							<td><a onclick="del('${resultType }',${item.id },${customer.id })" class="btn btn-link">删除</a></td>
 						</tr>
 					</s:iterator>
 					</tbody>
@@ -115,6 +117,11 @@
 	<script type="text/javascript">
 		function goback(){
 			history.go(-1);
+		}
+		
+		function del(resultType,id,custId){
+			if(window.confirm('若删除此联系人，可能会影响其他用户使用，确定要删除此联系人？'))
+				window.location.href="delCont.action?resultType="+resultType+"&id="+id+"&custId="+custId;
 		}
 	</script>
 </html>

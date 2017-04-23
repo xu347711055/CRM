@@ -3,7 +3,7 @@ package com.xu.user.service;
 import java.util.List;
 
 import com.xu.common.service.BaseService;
-import com.xu.role.domain.Auth;
+import com.xu.privilege.domain.Auth;
 import com.xu.role.domain.Role;
 import com.xu.user.domain.User;
 

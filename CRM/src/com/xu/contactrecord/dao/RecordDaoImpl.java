@@ -26,7 +26,7 @@ public class RecordDaoImpl extends BaseDaoImp<ContactRecord> implements RecordDa
 				StringBuilder sql = new StringBuilder();
 				sql.append("SELECT * FROM contactrecord ct,customer cust,`user` u,customer_owner co ");
 				sql.append("WHERE ct.cust_id=cust.id AND u.id=co.`owner` AND cust.id=co.cust ");
-				sql.append("AND u.id=?");
+				sql.append("AND u.id=? AND ct.state=1");
 				Query query = session.createSQLQuery(sql.toString()).addEntity("ct", ContactRecord.class);
 				query.setInteger(0, userId);
 				query.setFirstResult(offset);

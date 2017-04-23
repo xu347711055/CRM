@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.xu.privilege.domain.Auth;
 import com.xu.user.domain.User;
 
 @Entity
