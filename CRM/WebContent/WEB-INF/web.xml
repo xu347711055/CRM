@@ -72,6 +72,19 @@
        <filter-name>OpenSessionInViewFilter</filter-name>
        <url-pattern>/customer/shareCust.action</url-pattern>
    </filter-mapping>
+   <filter-mapping>
+       <filter-name>OpenSessionInViewFilter</filter-name>
+       <url-pattern>/system/listRole.action</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+       <filter-name>OpenSessionInViewFilter</filter-name>
+       <url-pattern>/system/getAuthsByRole.action</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+       <filter-name>OpenSessionInViewFilter</filter-name>
+       <url-pattern>/user/doLogin.action</url-pattern>
+   </filter-mapping>
+  
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>

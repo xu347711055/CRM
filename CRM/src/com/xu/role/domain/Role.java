@@ -15,7 +15,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.xu.privilege.domain.Auth;
-import com.xu.user.domain.User;
 
 @Entity
 public class Role {
@@ -34,10 +33,7 @@ public class Role {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateTime;
 	
-	@ManyToMany(mappedBy="roles")
-	private List<User> users = new ArrayList<User>();
-	
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany()
 	private List<Auth> auths = new ArrayList<>();
 	
 	public int getId() {
@@ -70,22 +66,12 @@ public class Role {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	public List<User> getUsers() {
-		return users;
-	}
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
+	
 	public List<Auth> getAuths() {
 		return auths;
 	}
 	public void setAuths(List<Auth> auths) {
 		this.auths = auths;
-	}
-	@Override
-	public String toString() {
-		return "Role [id=" + id + ", name=" + name + ", description=" + description + ", createTime=" + createTime
-				+ ", updateTime=" + updateTime + ", users=" + users + ", auths=" + auths + "]";
 	}
 	
 }

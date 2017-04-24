@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
+import com.xu.module.domain.Module;
 import com.xu.role.domain.Role;
 @Entity
 public class Auth {
@@ -36,9 +39,18 @@ public class Auth {
 	 */
 	@ManyToMany(mappedBy="auths")
 	private List<Role> roles = new ArrayList<>();
+	@ManyToOne
+	private Module moduleId;
 	
 	private int sort;
 	
+	
+	public Module getModuleId() {
+		return moduleId;
+	}
+	public void setModuleId(Module moduleId) {
+		this.moduleId = moduleId;
+	}
 	public int getState() {
 		return state;
 	}

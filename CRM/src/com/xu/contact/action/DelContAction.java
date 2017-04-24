@@ -1,6 +1,7 @@
 package com.xu.contact.action;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -13,6 +14,7 @@ import com.xu.contact.service.ContactService;
 @ParentPackage("cms")
 @Namespace("/customer")
 @Action("delCont")
+@InterceptorRef("privilegeStack")
 @Result(name=Constant.ResultType_ListContByCust, type="redirectAction", 
 		params={"actionName","${resultType}.action","custId","${custId}"})
 public class DelContAction {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -21,6 +22,7 @@ import com.xu.user.service.UserService;
 @ParentPackage("cms")
 @Namespace("/customer")
 @Action("doAddCust")
+@InterceptorRef("privilegeStack")
 @Results({@Result(name="success",location="custManage.action",type="redirect"),
 	@Result(name="fail",location="addCust.action",type="redirect")})
 public class DoAddCustAction implements ModelDriven<Customer>{

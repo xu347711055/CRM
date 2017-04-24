@@ -28,7 +28,7 @@ import com.xu.user.domain.User;
 @Namespace("/customer")
 @Result(name="success",location="custList.jsp")
 @Action("custManage")
-//@InterceptorRef("privilegeStack")
+@InterceptorRef("privilegeStack")
 public class CustManageAction implements ModelDriven<PageVO<Customer>>{
 	@Autowired
 	private CustService custService;

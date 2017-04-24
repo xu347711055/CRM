@@ -1,6 +1,7 @@
 package com.xu.contact.action;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -20,7 +21,7 @@ import com.xu.customer.domain.Customer;
 	@Result(name=Constant.ResultType_ListContByCust,type="redirectAction",params={"actionName",Constant.ResultType_ListContByCust,"custId","${custId}"}),
 	@Result(name=Constant.ResultType_ListCustManage,location="/customer/"+Constant.ResultType_ListCustManage+".action",type="redirect"),
 	@Result(name=Constant.ResultType_ListCustMain,location="/"+Constant.ResultType_ListCustMain+".action",type="redirect")})
-
+@InterceptorRef("privilegeStack")
 public class DoUpdateConAction implements ModelDriven<Contact> {
 	@Autowired
 	private ContactService contactService;

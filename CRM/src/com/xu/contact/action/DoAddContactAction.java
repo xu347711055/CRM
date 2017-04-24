@@ -1,6 +1,7 @@
 package com.xu.contact.action;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -14,6 +15,7 @@ import com.xu.customer.domain.Customer;
 @ParentPackage("cms")
 @Action("/doAddContact")
 @Namespace("/customer")
+@InterceptorRef("privilegeStack")
 @Result(name="success",type="redirectAction",params={"actionName","listContByCust","custId","${custId}"})
 public class DoAddContactAction implements ModelDriven<Contact>{
 	@Autowired

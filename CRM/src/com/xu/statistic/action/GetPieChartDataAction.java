@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -15,9 +16,10 @@ import com.xu.common.domain.PieChartData;
 import com.xu.customer.service.CustService;
 import com.xu.user.domain.User;
 
-@ParentPackage("json-default")
+@ParentPackage("json")
 @Namespace("/statistic")
 @Action("getPieChartData")
+@InterceptorRef("privilegeStack")
 @Result(name="success",type="json",params={"root","pieData"})
 public class GetPieChartDataAction {
 	@Autowired

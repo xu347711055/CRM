@@ -8,6 +8,12 @@
 </head>
 <body>
 <h2>您无权进行该操作</h2>
-<a href="${path }/loadMainAction.action">返回主页</a>
+<a href="" onclick="goback()">返回</a>
+
 </body>
+<script type="text/javascript">
+	function goback(){
+		history.go(-1)
+	}
+</script>
 </html>

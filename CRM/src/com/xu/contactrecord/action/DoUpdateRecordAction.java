@@ -1,6 +1,7 @@
 package com.xu.contactrecord.action;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -18,6 +19,7 @@ import com.xu.customer.domain.Customer;
 params={"actionName","listRecordByCust","custId","${custId}","cname","${cname}"}),
 	@Result(name="listRecordByUser",type="redirect",location="listRecordByUser.action")})
 @Action("doUpdateRecord")
+@InterceptorRef("privilegeStack")
 public class DoUpdateRecordAction implements ModelDriven<ContactRecord>{
 	@Autowired
 	private RecordService recordService;

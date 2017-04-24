@@ -1,6 +1,7 @@
 package com.xu.contactrecord.action;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -12,6 +13,7 @@ import com.xu.contactrecord.service.RecordService;
 @ParentPackage("cms")
 @Namespace("/customer")
 @Action("delRecord")
+@InterceptorRef("privilegeStack")
 @Result(name="success",type="redirectAction",params={"actionName","${updateType}.action","custId","${custId}"})
 public class DelRecordAction {
 	

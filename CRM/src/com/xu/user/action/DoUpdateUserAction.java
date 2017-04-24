@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xu.dept.domain.Department;
+import com.xu.role.domain.Role;
 import com.xu.user.domain.User;
 import com.xu.user.service.UserService;
 
@@ -24,6 +25,7 @@ public class DoUpdateUserAction implements ModelDriven<User> {
 	private User user = new User();
 	private String deptId;
 	private String msg;
+	private int roleId;
 	
 	public String execute(){
 		User onlineUser = (User) ActionContext.getContext().getSession().get("user");
@@ -34,8 +36,19 @@ public class DoUpdateUserAction implements ModelDriven<User> {
 		Department dept = new Department();
 		dept.setId(Integer.valueOf(deptId));//设置部门
 		user.setDept(dept);
+		Role role = new Role();
+		role.setId(roleId);
+		user.setRole(role);
 		userService.merge(user);
 		return "success";
+	}
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public User getUser() {

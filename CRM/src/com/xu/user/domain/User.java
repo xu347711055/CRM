@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,7 +55,7 @@ public class User {
 	/**
 	 * 所属部门
 	 */
-	@ManyToOne()
+	@ManyToOne
 	private Department dept;
 	/**
 	 * 创建时间
@@ -68,24 +69,16 @@ public class User {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(insertable=false,updatable=false)
 	private Date updateTime;
-	/**
-	 * 员工编号
-	 */
-	@Column(length=10)
-	private String empCode;
 	
-	@ManyToMany()
-	private List<Role> roles = new ArrayList<>();
+	@ManyToOne 
+	private Role role;
 	
 	
-	public List<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
-	public String getEmpCode() {
-		return empCode;
-	}
-	public void setEmpCode(String empCode) {
-		this.empCode = empCode;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	public int getId() {
 		return id;
@@ -161,9 +154,6 @@ public class User {
 		this.updateTime = updateTime;
 	}
 	
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

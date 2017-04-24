@@ -8,13 +8,10 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.xu.dept.domain.Department;
 import com.xu.dept.service.DeptService;
-import com.xu.user.domain.User;
 
 @ParentPackage("json-default")
 @Action("getDept")

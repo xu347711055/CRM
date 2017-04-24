@@ -19,25 +19,11 @@
 <div class="container">
 	<div class="col-md-12 column">
 		<blockquote class="layui-elem-quote">角色列表</blockquote>
-		<form class="form-horizontal" role="form" action="" method="post">
-			<fieldset>
-				<legend><span class="glyphicon glyphicon-search" style="color: rgb(9, 109, 169);"> 角色搜索</span></legend>
-				<div class="form-group">
-					<label for="name" class="col-sm-1 control-label">角色名</label>
-				    <div class="col-sm-2">
-				      	<input name="name" type="text" class="form-control" id="name">
-				    </div>
-				    <div class="col-sm-3">
-				      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search">搜索</span></button>
-				      <button type="reset" class="btn btn-default" value="清空"><span class="glyphicon glyphicon-trash" style="color: rgb(0, 0, 0);">清空</span></button>
-				    </div>
-			 	</div>
-		 	</fieldset>
-		 </form>
+		
 		 <fieldset>
 	 		<legend>
 				<span class="glyphicon glyphicon-th-list" style="color: rgb(9, 109, 169);"> 角色列表</span>
-				<a class="btn btn-info" href="addUser.action"><em class="glyphicon glyphicon-plus"></em> 新建</a> 
+				<a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal" id="add" onclick="setAddValue()"><em class="glyphicon glyphicon-plus"></em> 新增</a> 
 			</legend>
 			<table class="table table-hover">
 				<thead>
@@ -51,18 +37,151 @@
 				<tbody>
 				<s:iterator value="pagevo.data" var="item">
 					<tr>
-						<td><a href="updateRole.action?roleId=${item.id }">${item.name }</a></td>
+						<td>${item.name }</td>
 						<td>${item.createTime }</td>
 						<td>${item.updateTime }</td>
-						<td><a href="delUserAction">删除</a></td>
+						<td>
+							<a class="btn btn-link" data-toggle="modal" data-target="#setUserRole" id="setRole" onclick="setUserRole('${item.id }')">添加人员</a>
+							<a class="btn btn-link" data-toggle="modal" data-target="#modal" id="update" onclick="setUpdateValue('${item.id }','${item.name }')">修改</a>
+							<a class="btn btn-link" href="delUserAction">删除</a>
+						</td>
 					</tr>
 				</s:iterator>
 				</tbody>
 			</table>
 		</fieldset>				
 	</div>
+	<!-- 模态框，新增角色 -->
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <form action="doAddRole.action" method="post">
+            <input type="hidden" name="id" id="roleId">
+            <div class="modal-body">
+            <label for="name" class="col-sm-12 control-label">角色名称</label>
+				<input type="text" name="name" class="form-control" id="roleName"><br>
+			<h5>设置权限</h5>
+			<hr style="height:5px">
+			<table class="table">
+				<thead>
+					<tr class="active">
+						<th>模块名称</th>
+						<th>权限</th>
+					</tr>
+				</thead>
+				<tbody>
+				<s:iterator value="moduleList" var="module">
+					<tr>
+						<td>${module.name }</td>
+						<td class="auth">
+						<s:iterator value="#module.auths" var="auth">
+							${auth.name } <input type="checkbox" name="authId" value="${auth.id }"><br>
+						</s:iterator>
+						</td>
+					</tr>
+				</s:iterator>
+				</tbody>
+			</table>
+			</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    </div>
+    
+    <!-- 模态框，添加用户角色 -->
+	<div class="modal fade" id="setUserRole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            	<h4 class="modal-title" id="myModalLabel">将此用户设置为该角色</h4>
+            </div>
+				<form id="modalForm" role="form" method="post" action="setUserRole.action">
+				<input type="hidden" name="roleId" id="role_id">
+            <div class="modal-body">
+				<div class="col-sm-12 column" id="modalBody">
+				<div class="form-group">
+					<select id="dept" name="deptId" class="form-control">
+						<option>--请选择部门--</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<select id="user" name="userId" class="form-control">
+						<option>--请选择用户--</option>
+					</select>
+				</div>
+				</div>
+			</div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" >保存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+           </form> 
+        </div>
+    </div>
+</div>
 </div>
 <script src="${path }/bootstrap/js/jquery.min.js"></script>
 <script src="${path }/bootstrap/js/bootstrap.min.js"></script>
 </body>
+<script type="text/javascript">
+
+	function setUserRole(roleId){
+		console.log('roleId:'+roleId)
+		$("#role_id").attr("value",roleId);
+	}
+
+	$.getJSON("${path }/dept/getDept.action",function(data){
+		$.each(data,function(index,obj){
+			var Opt = $("<option></option>");
+			Opt.attr("value",obj.id).text(obj.name);
+			$("#dept").append(Opt);	
+		});
+	});
+	
+	$("#dept").change(function(){
+		var deptId = $(this).val();
+		getUserByDeptId(deptId);
+	});
+	
+	function getUserByDeptId(deptId){
+		$.getJSON("${path }/user/getUserByDept.action?deptId="+deptId,function(data){
+			$("#user").empty();
+			$("#user").append($("<option>--请选择用户--</option>"));
+			$.each(data,function(index,obj){
+				var Opt = $("<option></option>");
+				Opt.attr("value",obj.id).text(obj.name);
+				$("#user").append(Opt);	
+			});
+		});
+	}
+
+	function setUpdateValue(id,name){
+		$("#roleName").attr("value",name);
+		$("#roleId").attr("value",id);
+		$("#myModalLabel").text("修改角色");
+		var inputs = $(".auth input")
+		$.getJSON("http://localhost:8080/CRM/system/getAuthsByRole.action?id="+id,function(data){
+			$.each(inputs,function(index,input){
+				$.each(data,function(index,id){
+					if($(input).attr("value")==id){
+						$(input).attr("checked","checked");
+					}
+				});
+			});
+		});
+	}
+	
+	function setAddValue(){
+		$("#myModalLabel").text("添加角色");
+	}
+</script>
 </html>

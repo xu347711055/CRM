@@ -1,5 +1,6 @@
 package com.xu.user.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,16 +36,20 @@ public class DoLoginAction {
 	public String execute() throws Exception{
 		User user = userService.checkLogin(account, password);
 		if(user!=null){
-			int userId = user.getId();
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			//用户信息放入session
 			session.put("user", user);
-			List<Auth> authList = userService.getAuthByUser(userId);
-			//用户权限放入session
-			session.put("auth", authList);
-			List<Role> roleList = userService.getRoleByUser(userId);
-			//用户角色放入session
-			session.put("role", roleList);
+			Role role = user.getRole();
+			if(role!=null){
+				List<Auth> auths = role.getAuths();
+				List<String> urlList = new ArrayList<String>();
+				for(Auth auth:auths){
+					urlList.add(auth.getAccessPath());
+				}
+				//用户权限放入session
+				session.put("auth", urlList);
+			}
+			
 			return "success";
 		}
 		this.msg = "用户名或密码错误";

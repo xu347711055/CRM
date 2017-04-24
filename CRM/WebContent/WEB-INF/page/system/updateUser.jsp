@@ -29,7 +29,7 @@
 					<legend><span class="glyphicon glyphicon-th-list" style="color: rgb(9, 109, 169);"> 修改用户</span>
 						<div class="btn-group">
 							<button type="submit" class="btn btn-default">保存</button>
-							<button type="button" class="btn btn-primary">返回</button>
+							<button type="button" class="btn btn-primary" onclick="goback()">返回</button>
 						</div>
 					</legend>
 				<div class="form-group">
@@ -70,9 +70,14 @@
 				    </div>
 				 </div>
 				 <div class="form-group">
-				 	<label for="creater" class="col-sm-2 control-label">所属部门</label>
+				 	<label for="dept" class="col-sm-2 control-label">所属部门</label>
 				    <div class="col-sm-4">
 				      	<select id="dept" name="deptId" class="form-control"></select>
+				    </div>
+				    <label for="dept" class="col-sm-2 control-label">所属部门</label>
+				    <div class="col-sm-4">
+				     	<input type="text" value="${user.role.name }" disabled="disabled" class="form-control">
+				     	<input type="hidden" name="roleId" value="${user.role.id }" >
 				    </div>
 				 </div>
 				</fieldset>
@@ -82,6 +87,10 @@
 		<script src="${path }/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 	<script type="text/javascript">
+	function goback(){
+		history.go(-1);
+	}
+	
 	$.getJSON("http://localhost:8080/CRM/dept/getDept.action",function(data){
 		$.each(data,function(index,obj){
 			var Opt = $("<option></option>");

@@ -3,6 +3,7 @@ package com.xu.statistic.action;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -11,9 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.xu.common.domain.PieChartData;
 import com.xu.customer.service.CustService;
 
-@ParentPackage("json-default")
+@ParentPackage("json")
 @Namespace("/statistic")
 @Action("getAllPieChartData")
+@InterceptorRef("privilegeStack")
 @Result(name="success",type="json",params={"root","pieData"})
 public class GetAllPieChartDataAction {
 	@Autowired

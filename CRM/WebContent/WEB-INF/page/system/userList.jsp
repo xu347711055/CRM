@@ -18,27 +18,9 @@
     	<div class="container">
 		<div class="col-md-12 column">
 			<blockquote class="layui-elem-quote">用户列表</blockquote>
-			<form class="form-horizontal" role="form" action="" method="post">
-				<fieldset>
-					<legend><span class="glyphicon glyphicon-search" style="color: rgb(9, 109, 169);"> 用户搜索</span></legend>
-					<div class="form-group">
-						<label for="name" class="col-sm-1 control-label">姓名</label>
-					    <div class="col-sm-2">
-					      	<input name="name" type="text" class="form-control" id="name">
-					    </div>
-					    <label for="telephone" class="col-sm-1 control-label">账号</label>
-					    <div class="col-sm-2">
-							<input name="account" type="tel" class="form-control" id="account">
-					    </div>
-					    <div class="col-sm-3">
-					      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search">搜索</span></button>
-					      <button type="reset" class="btn btn-default" value="清空"><span class="glyphicon glyphicon-trash" style="color: rgb(0, 0, 0);">清空</span></button>
-					    </div>
-				 	</div>
-			 	</fieldset>
 			 	<fieldset>
 				<legend>
-					<span class="glyphicon glyphicon-th-list" style="color: rgb(9, 109, 169);"> 联系人列表</span>
+					<span class="glyphicon glyphicon-th-list" style="color: rgb(9, 109, 169);"> 用户列表</span>
 					<a class="btn btn-info" href="addUser.action"><em class="glyphicon glyphicon-plus"></em> 新建</a> 
 				</legend>
 				<table class="table table-hover">
@@ -55,7 +37,7 @@
 					<tbody>
 					<s:iterator value="users" var="item">
 						<tr>
-							<td><a href="updateUser.action?userId=${item.id }">${item.account }</a></td>
+							<td><a href="updateUser.action?userId=${item.id }" class="btn btn-link">${item.account }</a></td>
 							<td>${item.name }</td>
 							<td>${item.telephone }</td>
 							<td>${item.email }</td>
@@ -66,7 +48,6 @@
 					</tbody>
 				</table>
 			</fieldset>				
-			</form>
 			</div>
 		</div>
     	<script src="${path }/bootstrap/js/jquery.min.js"></script>

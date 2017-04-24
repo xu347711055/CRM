@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -21,6 +22,7 @@ import com.xu.customer.service.CustService;
 @Action("/listContByCust")
 @Namespace("/customer")
 @Result(name="success",location="contactList.jsp")
+@InterceptorRef("privilegeStack")
 public class ListContByCustAction implements ModelDriven<PageVO<Contact>> {
 	@Autowired
 	private ContactService contactService;

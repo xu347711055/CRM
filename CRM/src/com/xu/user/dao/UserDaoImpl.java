@@ -24,9 +24,9 @@ public class UserDaoImpl extends BaseDaoImp<User> implements UserDao {
 			@Override
 			public List<Auth> doInHibernate(Session session) throws HibernateException {
 				StringBuilder sql = new StringBuilder();
-				sql.append("select * from auth a,user u,role r,role_auth r_a,user_role u_r ");
-				sql.append("WHERE a.id=r_a.auths_id AND u.id=u_r.users_id AND ");
-				sql.append("r.id=r_a.roles_id AND r.id=u_r.roles_id AND u.id=?");
+				sql.append("select * from auth a,user u,role r,role_auth r_a ");
+				sql.append("WHERE a.id=r_a.auths_id AND ");
+				sql.append("r.id=r_a.roles_id AND u.id=?");
 				Query query = session.createSQLQuery(sql.toString()).addEntity(Auth.class);
 				query.setInteger(0,userId);
 				return query.list();
