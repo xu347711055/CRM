@@ -31,10 +31,12 @@ public class ListUserAction {
 			return "noAuth"; 
 		}
 		Map<String, String> orders = new HashMap<>();
+		orders.put("admin", "desc");
 		orders.put("id", "asc");
 		Map<String, Object> conditions = new HashMap<>();
 		conditions.put("status", 1);
 		users = userService.list(conditions, User.class, orders);
+		users.remove(onlineUser);	//把自己去掉
 		return "success";
 	}
 

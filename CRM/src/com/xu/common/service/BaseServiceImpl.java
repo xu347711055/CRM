@@ -82,8 +82,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 			for (Map.Entry<String, String> entry : orders.entrySet()) {
 				if ("asc".equalsIgnoreCase(entry.getValue())) {
 					orderList.add(Order.asc(entry.getKey()));
+				}else if("desc".equalsIgnoreCase(entry.getValue())){
+					orderList.add(Order.desc(entry.getKey()));
 				}
-
 			}
 			orderArray = orderList.toArray(new Order[orders.size()]);
 		}

@@ -43,7 +43,7 @@
 						<td>
 							<a class="btn btn-link" data-toggle="modal" data-target="#setUserRole" id="setRole" onclick="setUserRole('${item.id }')">添加人员</a>
 							<a class="btn btn-link" data-toggle="modal" data-target="#modal" id="update" onclick="setUpdateValue('${item.id }','${item.name }')">修改</a>
-							<a class="btn btn-link" href="delUserAction">删除</a>
+							<a class="btn btn-link" onclick="delRole('${item.id }')">删除</a>
 						</td>
 					</tr>
 				</s:iterator>
@@ -133,6 +133,12 @@
 <script src="${path }/bootstrap/js/bootstrap.min.js"></script>
 </body>
 <script type="text/javascript">
+
+	function delRole(id){
+		if(confirm('确定要删除该角色？')){
+			window.location.href='delRole.action?id='+id;
+		}
+	}
 
 	function setUserRole(roleId){
 		console.log('roleId:'+roleId)

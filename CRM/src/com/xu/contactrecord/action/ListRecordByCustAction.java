@@ -37,7 +37,9 @@ public class ListRecordByCustAction {
 		Map<String,Object> conditions = new HashMap<>();
 		conditions.put("cust", cust);
 		conditions.put("state", 1);
-		pagevo = recordService.listByPage(ContactRecord.class, pagevo, conditions, null);
+		Map<String,String> orders = new HashMap<>();
+		orders.put("contactName", "asc");
+		pagevo = recordService.listByPage(ContactRecord.class, pagevo, conditions, orders);
 		updateType = "listRecordByCust";
 		return "success";
 	}

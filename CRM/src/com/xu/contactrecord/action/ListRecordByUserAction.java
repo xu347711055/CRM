@@ -31,7 +31,7 @@ public class ListRecordByUserAction {
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		if(user.getAdmin()==1){
 			Map<String,String> orders = new HashMap<>();
-			orders.put("id", "asc");
+			orders.put("contactName", "asc");
 			Map<String,Object> conditions = new HashMap<>();
 			conditions.put("state", 1);
 			pagevo = recordService.listByPage(ContactRecord.class, pagevo, conditions, orders);

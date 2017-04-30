@@ -33,12 +33,16 @@ public class DoUpdateUserAction implements ModelDriven<User> {
 			return "noAuth"; 
 		}
 		user.setStatus(1);
-		Department dept = new Department();
-		dept.setId(Integer.valueOf(deptId));//设置部门
-		user.setDept(dept);
-		Role role = new Role();
-		role.setId(roleId);
-		user.setRole(role);
+		if(deptId!=null){
+			Department dept = new Department();
+			dept.setId(Integer.valueOf(deptId));//设置部门
+			user.setDept(dept);
+		}
+		if(roleId!=0){
+			Role role = new Role();
+			role.setId(roleId);
+			user.setRole(role);
+		}
 		userService.merge(user);
 		return "success";
 	}

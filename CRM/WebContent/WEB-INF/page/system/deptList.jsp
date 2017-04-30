@@ -39,9 +39,9 @@
 						<td>${item.name }</td>
 						<td>${item.principal }</td>
 						<td>
-						<a href="" data-toggle="modal" data-target="#modal" id="update" onclick="setUpdateValue('${item.id }','${item.name }','${principal }')">修改</a>
+						<a class="btn btn-link" data-toggle="modal" data-target="#modal" id="update" onclick="setUpdateValue('${item.id }','${item.name }','${principal }')">修改</a>
 						<input type="hidden" value="" id="">
-						<a href="">删除</a>
+						<a class="btn btn-link" onclick="delDept('${item.id }')">删除</a>
 						</td>
 					</tr>
 				</s:iterator>
@@ -79,6 +79,13 @@
 <script src="${path }/bootstrap/js/bootstrap.min.js"></script>
 </body>
 <script type="text/javascript">
+	
+	function delDept(id){
+		if(confirm("确定要删除该部门？"))
+			console.log(id);
+			window.location.href="delDept.action?id="+id;
+	}
+
 	function setUpdateValue(id,name,principal){
 		$("#deptName").attr("value",name);
 		$("#deptPrincipal").attr("value",principal);

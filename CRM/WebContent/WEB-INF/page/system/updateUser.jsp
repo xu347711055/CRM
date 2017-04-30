@@ -74,7 +74,7 @@
 				    <div class="col-sm-4">
 				      	<select id="dept" name="deptId" class="form-control"></select>
 				    </div>
-				    <label for="dept" class="col-sm-2 control-label">所属部门</label>
+				    <label for="dept" class="col-sm-2 control-label">角色</label>
 				    <div class="col-sm-4">
 				     	<input type="text" value="${user.role.name }" disabled="disabled" class="form-control">
 				     	<input type="hidden" name="roleId" value="${user.role.id }" >
@@ -92,6 +92,7 @@
 	}
 	
 	$.getJSON("http://localhost:8080/CRM/dept/getDept.action",function(data){
+		$("#dept").append($("<option>--请选择--</option>"));
 		$.each(data,function(index,obj){
 			var Opt = $("<option></option>");
 			Opt.attr("value",obj.id).text(obj.name);

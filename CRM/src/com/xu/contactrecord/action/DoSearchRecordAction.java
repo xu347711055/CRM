@@ -42,6 +42,7 @@ public class DoSearchRecordAction {
 	
 	public String execute(){
 		Map<String, Object> conditionsEq = new HashMap<>();
+		conditionsEq.put("ct.state", 1);
 		Map<String, Object> conditionLike = new HashMap<>();
 		Map<String, List<Object>> orEq = new HashMap<>();
 		//封装查询条件
@@ -68,7 +69,11 @@ public class DoSearchRecordAction {
 		}else{
 			User user = (User) ActionContext.getContext().getSession().get("user");
 			if(user.getAdmin()==1){
-				pagevo = recordService.getRecordsByConditions(pagevo, conditionsEq, conditionLike, null, orEq);
+				Map<String, String> orders = new HashMap<>();
+				Map<String, Object> condition = new HashMap<>();
+				condition.put("state", 1);
+				orders.put("contactName", "asc");
+				pagevo = recordService.listByPage(ContactRecord.class, pagevo, condition, orders);
 			}else{
 				conditionsEq.put("u.id", user.getId());
 				pagevo = recordService.getRecordsByConditions(pagevo, conditionsEq, conditionLike, null, orEq);
