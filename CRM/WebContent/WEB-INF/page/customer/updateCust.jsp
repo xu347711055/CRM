@@ -24,7 +24,6 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 		<link rel="stylesheet" href="${path}/plugins/layui/css/layui.css" media="all" />
 		<link rel="stylesheet" href="${path}/css/global.css" media="all">
-		<title>客户资料</title>
 	</head>
 	<style>
 		

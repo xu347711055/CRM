@@ -22,6 +22,8 @@
     <constant name="struts.configuration.xml.reload" value="true"/>
 	<!-- 国际化配置 -->
 	<constant name="struts.custom.i18n.resources" value="message" />
+	
+	<constant name= "struts.multipart.maxSize" value="524288000" />
 	<package name="cms" extends="struts-default">
 		<interceptors>
 			<interceptor name="loginStateInterceptor" class="com.xu.user.action.LoginStateInterceptor"></interceptor>

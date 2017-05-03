@@ -24,4 +24,13 @@ var navs = [{
 		"icon": "fa-check-square-o",
 		"href": "/CRM/statistic/custChart.action"
 	}]
+},{
+	"title": "附件管理",
+	"icon": "&#xe624;",
+	"spread": false,
+	"children": [{
+		"title": "附件管理",
+		"icon": "&#xe62f;",
+		"href": "/CRM/attachment/list.action"
+	}]
 }];

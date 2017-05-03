@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -21,7 +22,8 @@ import com.xu.user.domain.User;
 
 @ParentPackage("cms")
 @Namespace("/customer")
-@Result(name="success",location="custList.jsp")
+@Results({@Result(name=Constant.ResultType_ListCustManage,location="custList.jsp"),
+	@Result(name=Constant.ResultType_ListCustAttach,location="/WEB-INF/page/attachment/list.jsp")})
 @Action("doSearch")
 public class DoSearchAction {
 	@Autowired
@@ -35,7 +37,7 @@ public class DoSearchAction {
 	private String level;
 	private Date contactDate;
 	private String source;
-	private String resultType = Constant.ResultType_ListCustManage;
+	private String resultType;
 	
 	public String execute(){
 		User user = (User) ActionContext.getContext().getSession().get("user");
@@ -74,7 +76,7 @@ public class DoSearchAction {
 			pagevo = custService.listCustByUserEqAndLike(alias, conditions, pagevo, orders, conditionsLike,null,null,null);
 		}
 		custList = pagevo.getData();
-		return "success";
+		return resultType;
 	}
 
 	

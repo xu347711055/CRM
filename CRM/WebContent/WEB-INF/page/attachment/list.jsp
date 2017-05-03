@@ -33,27 +33,9 @@
 		
 	<div class="container">
 	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="tabbable" id="tabs-950584">
-				<ul class="nav nav-tabs">
-					<li class="active">
-						 <a href="" data-toggle="tab">客户拜访</a>
-					</li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="panel-348889">
-						<div class="col-md-12 column">
-							<a id="modal-977400" href="doSearchTodayCust.action" class="btn btn-default btn-link" >今天需要联系的客户</a>
-<!-- 							<a id="modal-977400" href="#expire-client" class="btn btn-default btn-link" >过期未联系的客户</a> -->
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr />
 		<br />
 		<div class="col-sm-12 column">
-			<form class="form-horizontal" role="form" action="doSearch.action" method="post">
+			<form class="form-horizontal" role="form" action="${path }/customer/doSearch.action" method="post">
 				<input type="hidden" name="resultType" value="${resultType }">
 				<fieldset>
 					<legend><span class="glyphicon glyphicon-search" style="color: rgb(9, 109, 169);"> 客户搜索</span></legend>
@@ -109,17 +91,10 @@
 				<fieldset>
 					<legend>
 						<span class="glyphicon glyphicon-list-alt" style="color: rgb(9, 109, 169);">客户列表</span><br />
-						<div class="btn-group btn-group-md">
-				 			<a class="btn btn-info" href="addCust.action"><em class="glyphicon glyphicon-plus"></em> 新建</a> 
-<!-- 				 			<button class="btn btn-info" type="button"><em class="glyphicon glyphicon-user"></em> 共享</button> -->
-						</div>						
 					</legend>
 					<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>
-							操作
-						</th>
 						<th>
 							客户编号
 						</th>
@@ -144,8 +119,7 @@
 				<tbody>
 				<s:iterator value="custList" var="item">
 					<tr>
-					<td><button class="btn btn-primary" data-target="#options" data-toggle="modal" onclick="optionClick(${item.id })">选项</button></td>
-					<td><a class="btn btn-link" href="updateCust.action?id=${item.id}&resultType=${resultType }">${item.cnumber}</a></td>
+					<td><a class="btn btn-link" href="listAttach.action?custId=${item.id}">${item.cnumber}</a></td>
 					<td>${item.cname}</td>
 					<td>${item.telephone}</td>
 					<td>${item.email}</td>
@@ -159,59 +133,11 @@
 				</s:iterator>
 				</tbody>
 			</table>
-				<t:page url="custManage.action" pagevo="${pagevo}"/>
+				<t:page url="${path }/attachment/list.action" pagevo="${pagevo}"/>
 				</fieldset>
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="options" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-				<a class="btn btn-link" id="delCust">删除此档案</a>
-				<a class="btn btn-link" id="shareCust" data-target="#share" data-toggle="modal">共享此档案</a>
-				<a class="btn btn-link" id="changeOwner" data-target="#share" data-toggle="modal">转移此客户所属人</a>
-			</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            	<h4 class="modal-title" id="myModalLabel">共享此客户给以下用户</h4>
-            </div>
-				<form id="modalForm" role="form" method="post">
-            <div class="modal-body">
-				<div class="col-sm-12 column" id="modalBody">
-				<input name="custId" type="hidden" id="formInput">
-				<input name="shareType" type="hidden" id="shareType">
-				<div class="form-group">
-					<select id="dept" name="deptId" class="form-control">
-						<option>--请选择部门--</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<select id="user" name="userId" class="form-control">
-						<option>--请选择用户--</option>
-					</select>
-				</div>
-				</div>
-			</div>
-           </form> 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="submitShare()">保存</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 
 	<script src="${path }/bootstrap/js/jquery.min.js"></script>

@@ -25,6 +25,15 @@ var navs = [{
 		"href": "/CRM/statistic/custChart.action"
 	}]
 },{
+	"title": "附件管理",
+	"icon": "&#xe624;",
+	"spread": false,
+	"children": [{
+		"title": "附件管理",
+		"icon": "&#xe62f;",
+		"href": "/CRM/attachment/list.action"
+	}]
+},{
 	"title": "系统设置",
 	"icon": "fa-cogs",
 	"spread": false,
