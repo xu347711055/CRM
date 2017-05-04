@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -22,6 +23,7 @@ import com.xu.user.domain.User;
 @ParentPackage("cms")
 @Namespace("/attachment")
 @Action("doUpload")
+@InterceptorRef("privilegeStack")
 @Result(name="success",type="redirectAction",params={"actionName","listAttach","custId","${custId}"})
 public class DoUploadAction {
 	@Autowired

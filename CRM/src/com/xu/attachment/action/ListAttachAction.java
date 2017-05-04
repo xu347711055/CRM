@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -19,6 +20,7 @@ import com.xu.customer.domain.Customer;
 @Namespace("/attachment")
 @Action("listAttach")
 @Result(name="success",location="attachment.jsp")
+@InterceptorRef("privilegeStack")
 public class ListAttachAction implements ModelDriven<PageVO<Attachment>>{
 	@Autowired
 	private AttachService attachService;
