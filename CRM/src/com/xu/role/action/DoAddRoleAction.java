@@ -25,12 +25,12 @@ public class DoAddRoleAction {
 	private String name;	//角色名称
 	
 	public String execute(){
-		Role role = new Role();
-		if(id==0){		//添加角色
-			role.setName(name);
-		}else{		//修改角色
+		Role role = new Role();	//新增
+		if(id!=0){		
+			//修改角色
 			role = roleService.get(Role.class, id);
 		}
+		role.setName(name);
 		List<Auth> auths = new ArrayList<>();
 		for(int i = 0; i < authId.length; i++){
 			Auth auth = new Auth();

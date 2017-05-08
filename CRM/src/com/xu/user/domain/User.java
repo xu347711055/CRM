@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,10 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.xu.customer.domain.Customer;
 import com.xu.dept.domain.Department;
 import com.xu.role.domain.Role;
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

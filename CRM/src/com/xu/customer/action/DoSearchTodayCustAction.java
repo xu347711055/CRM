@@ -42,13 +42,16 @@ public class DoSearchTodayCustAction {
 		Map<String,String> orders = new HashMap<>();
 		orders.put("id", "asc");
 		if(user.getAdmin()==1){
-			pagevo = custService.listCustByUserEqAndLike(null, null, pagevo, orders, null,
+			Map<String,Object> conditionEq = new HashMap<>();
+			conditionEq.put("state", 1);
+			pagevo = custService.listCustByUserEqAndLike(null, conditionEq, pagevo, orders, null,
 					"contactDate", timeScope.get("begin"), timeScope.get("end"));
 		}else{
 			Map<String,Object> conditions = new HashMap<>();
 			Map<String,String> alias = new HashMap<>();
 			alias.put("owner", "o");
 			conditions.put("o.id", user.getId());
+			conditions.put("state", 1);
 			pagevo = custService.listCustByUserEqAndLike(alias, conditions, pagevo, orders, null, 
 					"contactDate", timeScope.get("begin"), timeScope.get("end"));
 		}

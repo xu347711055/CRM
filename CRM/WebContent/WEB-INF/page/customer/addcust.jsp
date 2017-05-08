@@ -142,11 +142,6 @@
 						    <div class="col-sm-4">
 						      	<input name="contactDate" type="datetime-local" class="form-control" id="nextContact">
 						    </div>
-						    <label for="custProperty" class="col-sm-2 control-label"><span class="labelspan">客户性质：</span></label>
-						    <div class="col-sm-4">
-						      	<select class="form-control" name="custNature" id="custQuality">
-						      	</select>
-						    </div>
 					    </div>
 					    <div class="form-group">
 							<label for="remark" class="col-sm-2 control-label"><span class="labelspan">备注：</span></label>				    	

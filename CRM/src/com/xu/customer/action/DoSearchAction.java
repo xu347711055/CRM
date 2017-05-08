@@ -44,6 +44,7 @@ public class DoSearchAction {
 		Map<String,String> orders = new HashMap<>();
 		orders.put("id", "asc");
 		Map<String,Object> conditions = new HashMap<>();
+		conditions.put("state", 1);
 		Map<String,Object> conditionsLike = new HashMap<>();
 		if(!StringUtils.isEmpty(cnumber)){
 			conditions.put("cnumber", cnumber);

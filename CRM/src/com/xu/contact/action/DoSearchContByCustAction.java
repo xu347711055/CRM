@@ -39,6 +39,7 @@ public class DoSearchContByCustAction {
 	
 	public String execute(){
 		Map<String, Object> conditions = new HashMap<>();
+		conditions.put("state", 1);
 		Map<String, Object> conditionsLike = new HashMap<>();
 		if(!StringUtils.isEmpty(contName)){	//按联系人姓名查询
 			System.out.println("查询条件：name="+contName);

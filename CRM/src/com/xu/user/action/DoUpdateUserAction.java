@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
+import com.xu.common.util.MD5Util;
 import com.xu.dept.domain.Department;
 import com.xu.role.domain.Role;
 import com.xu.user.domain.User;
@@ -27,7 +28,7 @@ public class DoUpdateUserAction implements ModelDriven<User> {
 	private String msg;
 	private int roleId;
 	
-	public String execute(){
+	public String execute() throws Exception{
 		User onlineUser = (User) ActionContext.getContext().getSession().get("user");
 		if(onlineUser.getAdmin()!=1){
 			return "noAuth"; 
@@ -43,6 +44,9 @@ public class DoUpdateUserAction implements ModelDriven<User> {
 			role.setId(roleId);
 			user.setRole(role);
 		}
+		
+		String password = user.getPassword();
+		user.setPassword(MD5Util.md5(password));//先把密码加密再保存
 		userService.merge(user);
 		return "success";
 	}

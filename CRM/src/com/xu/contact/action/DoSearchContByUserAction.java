@@ -46,7 +46,7 @@ public class DoSearchContByUserAction {
 		Map<String, Object> conditions = new HashMap<>();
 		Map<String, Object> conditionsLike = new HashMap<>();
 		Map<String, List<Object>> orEq = new HashMap<>();
-		
+		conditions.put("ct.state", 1);
 		user = (User) ActionContext.getContext().getSession().get("user");//查询当前用户
 		//开始封装查询条件
 		if(!StringUtils.isEmpty(contName)){	//按联系人姓名查询
