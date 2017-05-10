@@ -21,6 +21,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	@Override
 	public User checkLogin(String account, String password) throws Exception {
 		User user = this.get(User.class, "account", account);
+		System.out.println("account:"+account+"--password:"+MD5Util.md5(password));
+		System.out.println("service:account:"+user.getAccount()+"--passwd:"+user.getPassword()+"--status:"+user.getStatus());
 		if(user==null || user.getStatus()==0){
 			return null;
 		}

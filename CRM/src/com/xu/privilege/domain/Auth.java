@@ -5,16 +5,20 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.xu.module.domain.Module;
 import com.xu.role.domain.Role;
+
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Auth {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

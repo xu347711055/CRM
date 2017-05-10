@@ -24,17 +24,33 @@
 	<constant name="struts.custom.i18n.resources" value="message" />
 	
 	<constant name= "struts.multipart.maxSize" value="524288000" />
-	<package name="cms" extends="struts-default">
-		<interceptors>
+	<package name="frame" extends="struts-default">
+	<interceptors>
 			<interceptor name="loginStateInterceptor" class="com.xu.user.action.LoginStateInterceptor"></interceptor>
-			<interceptor name="privilegeInterceptor" class="com.xu.privilege.action.PrivilegeInterceptor"></interceptor>
 			<interceptor-stack name="loginStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="loginStateInterceptor"></interceptor-ref>
 			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="loginStack"></default-interceptor-ref>
+		<global-results>
+			<result name="login" type="redirect">/user/login.action</result>
+		</global-results>
+	</package>
+	<package name="cms" extends="struts-default">
+		<interceptors>
+			<interceptor name="loginStateInterceptor" class="com.xu.user.action.LoginStateInterceptor"></interceptor>
+			<interceptor name="privilegeInterceptor" class="com.xu.privilege.action.PrivilegeInterceptor"></interceptor>
+			<interceptor name="loadingInterceptor" class="com.xu.customer.action.LoadingInterceptor"></interceptor>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="loginStateInterceptor"></interceptor-ref>
+				<interceptor-ref name="loadingInterceptor"></interceptor-ref>
+			</interceptor-stack>
 			<interceptor-stack name="privilegeStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
+				<interceptor-ref name="loadingInterceptor"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="loginStack"></default-interceptor-ref>
@@ -76,5 +92,6 @@
 			<result name="login" type="redirect">${path}/user/mainAction.action</result>
 		</global-results>
 	</package>
+	
 	
 </struts>

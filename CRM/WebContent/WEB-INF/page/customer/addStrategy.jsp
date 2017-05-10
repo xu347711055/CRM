@@ -14,8 +14,6 @@
 		<link rel="stylesheet" href="../css/global.css" media="all">
 	</head>
 	<body>
-		<script src="../bootstrap/js/jquery.min.js"></script>
-		<script src="../bootstrap/js/bootstrap.min.js"></script>
 		<div class="container">
 			<blockquote class="layui-elem-quote">新建-客户策略</blockquote>
 			<form class="form-horizontal" action="doAddStrategy.action" method="post">
@@ -50,5 +48,6 @@
 				</fieldset>
 			</form>
 		</div>
+	<%@include file="/WEB-INF/page/commonjs.jsp" %>
 	</body>
 </html>

@@ -35,6 +35,7 @@ public class DoLoginAction {
 	
 	public String execute() throws Exception{
 		User user = userService.checkLogin(account, password);
+		System.out.println("action:user:"+user);
 		if(user!=null){
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			//用户信息放入session

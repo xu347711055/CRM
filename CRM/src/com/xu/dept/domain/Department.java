@@ -5,10 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
-import com.xu.user.domain.User;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Department {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

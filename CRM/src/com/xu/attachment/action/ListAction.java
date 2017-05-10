@@ -36,11 +36,7 @@ public class ListAction implements ModelDriven<PageVO<Customer>>{
 		Map<String,Object> conditions = new HashMap<>();
 		if(user.getAdmin()==1){
 			pagevo = custService.listByPageWithState(pagevo, 1);
-			/*List<Customer> data = pagevo.getData();
-			Set<Customer> custSet = new LinkedHashSet<>();	//去重
-			custSet.addAll(data);
-			data.clear();
-			data.addAll(custSet);*/
+			
 		}else{
 			Map<String,String> alias = new HashMap<>();
 			alias.put("owner", "o");

@@ -35,8 +35,7 @@
 				 </fieldset>
 			</form>
 		</div>
-		<script src="${path }/bootstrap/js/jquery.min.js"></script>
-		<script src="${path }/bootstrap/js/bootstrap.min.js"></script>
+		<%@include file="/WEB-INF/page/commonjs.jsp" %>
 </body>
 <script type="text/javascript">
 		function goback(){

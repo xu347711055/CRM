@@ -1,6 +1,5 @@
 package com.xu.main.action;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +26,6 @@ import com.xu.user.domain.User;
 @ParentPackage("cms")
 @Result(name="success",location="main.jsp")
 @Action("loadMainAction")
-//@InterceptorRef("privilegeStack")
 public class LoadMainAction {
 	@Autowired
 	private ContactService contService;
@@ -40,7 +38,7 @@ public class LoadMainAction {
 	private String username;
 	private String resultType;
 	
-	public String execute() throws ParseException{
+	public String execute() throws Exception{
 		
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		username = user.getName(); 

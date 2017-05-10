@@ -27,8 +27,9 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 		<link rel="stylesheet" href="${path }/plugins/layui/css/layui.css" media="all" />
 		<link rel="stylesheet" href="${path }/css/global.css" media="all">
+		
+	
 	</head>
-
 	<body>
 		
 	<div class="container">
@@ -213,12 +214,11 @@
     </div>
 </div>
 </div>
-
-	<script src="${path }/bootstrap/js/jquery.min.js"></script>
-	<script src="${path }/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${path }/plugins/layui/layui.js"></script>
-	</body>
+</div>
+	<%@include file="/WEB-INF/page/commonjs.jsp" %>
+</body>
 	<script type="text/javascript">
+	
 	$("#shareCust").click(function(){
 		$("#modalForm").attr("action","shareCust.action");
 	});

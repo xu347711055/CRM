@@ -23,6 +23,7 @@
 		<div class="container">
 			<blockquote class="layui-elem-quote">修改-用户</blockquote>
 			<form class="form-horizontal" action="doUpdateUser.action" method="post">
+				<input type="hidden" value="${user.password }" name="password">
 				<input type="hidden" value="${user.id }" name="id">
 				<input type="hidden" value="${user.account }" name="account">
 				<fieldset>
@@ -37,9 +38,16 @@
 				    <div class="col-sm-4">
 				      	<input value="${user.account }" name="account" type="text" class="form-control" id="account" disabled="disabled">
 				    </div>
-				    <label for="password" class="col-sm-2 control-label">密码</label>
+				   
+				</div>
+				<div class="form-group">
+					<label for="password" class="col-sm-2 control-label">修改密码</label>
 				    <div class="col-sm-4">
-				      	<input value="${user.password }" name="password" type="password" class="form-control" id="password">
+				      	<input name="chpwd" type="password" class="form-control" id="password">
+				    </div>
+				    <label for="confirm" class="col-sm-2 control-label">确认密码</label>
+				    <div class="col-sm-4">
+				      	<input name="confirm" type="password" class="form-control" id="confirm">
 				    </div>
 				</div>
 				<div class="form-group">

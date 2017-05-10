@@ -109,5 +109,7 @@
 			</fieldset>				
 		</div>
 		</div>
+		
+		<%@include file="/WEB-INF/page/commonjs.jsp" %>
 	</body>
 </html>

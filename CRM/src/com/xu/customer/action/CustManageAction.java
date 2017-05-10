@@ -36,7 +36,9 @@ public class CustManageAction implements ModelDriven<PageVO<Customer>>{
 	private PageVO<Customer> pagevo = new PageVO<>();
 	private String resultType = Constant.ResultType_ListCustManage;
 	
-	public String execute(){
+	public String execute() throws Exception {
+		Thread.sleep(2000);
+		
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		Map<String,String> orders = new HashMap<>();
 		orders.put("id", "asc");

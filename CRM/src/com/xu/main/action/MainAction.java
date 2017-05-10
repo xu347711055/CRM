@@ -8,7 +8,7 @@ import org.apache.struts2.convention.annotation.Results;
 import com.opensymphony.xwork2.ActionContext;
 import com.xu.user.domain.User;
 
-@ParentPackage("cms")
+@ParentPackage("frame")
 @Results({@Result(name="admin",location="adminIndex.jsp"),
 	@Result(name="login",location="user/login.jsp"),
 	@Result(name="user",location="index.jsp")})

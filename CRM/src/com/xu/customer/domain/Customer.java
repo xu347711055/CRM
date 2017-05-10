@@ -18,11 +18,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.xu.common.domain.City;
 import com.xu.contact.domain.Contact;
 import com.xu.user.domain.User;
 
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Customer {
 	/**
 	 * id

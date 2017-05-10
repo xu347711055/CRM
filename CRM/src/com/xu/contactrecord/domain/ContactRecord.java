@@ -11,10 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.xu.customer.domain.Customer;
 import com.xu.user.domain.User;
 
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class ContactRecord {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

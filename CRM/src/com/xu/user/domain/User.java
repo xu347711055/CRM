@@ -14,14 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import com.xu.customer.domain.Customer;
 import com.xu.dept.domain.Department;
 import com.xu.role.domain.Role;
+
 @Entity
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -177,5 +175,7 @@ public class User {
 			return false;
 		return true;
 	}
+	
+	
 	
 }

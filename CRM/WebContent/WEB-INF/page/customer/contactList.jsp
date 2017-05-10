@@ -113,6 +113,7 @@
 			</fieldset>				
 		</div>
 		</div>
+		<%@include file="/WEB-INF/page/commonjs.jsp" %>
 	</body>
 	<script type="text/javascript">
 		function goback(){
